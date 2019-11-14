@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CrystalSwitch : MonoBehaviour
 {
-    private bool _active = false;
-    private GameObject _lightEmitter;
+    public bool _active = false;
+    public GameObject _lightEmitter;
 
     void Start()
     {
@@ -35,6 +35,7 @@ public class CrystalSwitch : MonoBehaviour
     public void Deactivate()
     {
         _active = false;
+        _lightEmitter.GetComponent<LightEmitter>()._activeCrystals.Remove(this.gameObject);
         _lightEmitter = null;
         GetComponent<Renderer>().material.color = Color.white;
     }

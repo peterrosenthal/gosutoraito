@@ -868,6 +868,11 @@ PrefabInstance:
       propertyPath: _isActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1380764361997465317, guid: 49c95cbdc34f05443921f69715dff550,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49c95cbdc34f05443921f69715dff550, type: 3}
 --- !u!4 &700419583 stripped
@@ -949,7 +954,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: NaN, w: 8.4e-44}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 1.83672e-40, w: -3.11e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1387,7 +1392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &1058064171
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1456,7 +1461,7 @@ Transform:
   m_GameObject: {fileID: 1058064170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.86, y: 3.5, z: 2.89}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1473,6 +1478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb28285c628b7f478017349eb88fe21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _active: 0
+  _lightEmitter: {fileID: 0}
 --- !u!1001 &1219697503
 PrefabInstance:
   m_ObjectHideFlags: 0

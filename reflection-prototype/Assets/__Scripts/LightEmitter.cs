@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LightEmitter : MonoBehaviour
 {
-    public List<GameObject> _activeCrystals;
-    public GameObject _hittingLightEmitter;
+    public bool debug;
 
     public int _maxReflectionCount = 5;
     public float _maxStepDistance = 200;
     public bool _drawPrediction;
     public bool _isActive = false;
+
+    public List<GameObject> _activeCrystals;
+    public GameObject _activePrism;
+    public GameObject _parentLightEmitter;
 
     private LineRenderer _lineRenderer;
     private List<Vector3> _lineVertices;
@@ -24,22 +25,24 @@ public class LightEmitter : MonoBehaviour
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineVertices = new List<Vector3>(_maxReflectionCount + 1);
-        _activeCrystals = new List<GameObject>();
+        _activeCrystals = new List<GameObject>
+        {
+            this.gameObject
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isActive || _hittingLightEmitter != null)
+        if (_isActive || _parentLightEmitter)
         {
             DrawLight();
             GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
         }
-        if (_hittingLightEmitter != null && !_hittingLightEmitter.GetComponent<LightEmitter>()._activeCrystals.Contains(this.gameObject)) 
+        if (_parentLightEmitter != null && _parentLightEmitter.GetComponent<LightEmitter>()._activePrism != this.gameObject) 
         {
-            Deactivate();
+            DeactivatePrism();
         }
-
     }
 
     private void OnDrawGizmos()
@@ -54,6 +57,7 @@ public class LightEmitter : MonoBehaviour
 
     void DrawLight()
     {
+        _activeCrystals.Clear();
         _lineVertices.Clear();
         _lineVertices.Add(this.transform.position);
         _ray = new Ray(_lineVertices[0], this.transform.forward);
@@ -83,6 +87,7 @@ public class LightEmitter : MonoBehaviour
         }
         else
         {
+            _activePrism = null;
             _activeCrystals.Clear();
             _lineVertices.Add(this.transform.position + (this.transform.forward * _maxStepDistance));
         }
@@ -90,35 +95,7 @@ public class LightEmitter : MonoBehaviour
         _lineRenderer.SetPositions(_lineVertices.ToArray());
     }
 
-    void ActivateCrystal(GameObject go)
-    {
-        CrystalSwitch crystal;
-        crystal = go.GetComponent<CrystalSwitch>();
-        crystal.Activate();
-        crystal.SetLight(this.gameObject);
-        if (!_activeCrystals.Contains(go))
-        {
-            _activeCrystals.Add(go);
-        }
-        
-    }
-
-    void ActivatePrism(GameObject go)
-    {
-        LightEmitter prism;
-        prism = go.GetComponent<LightEmitter>();
-        prism.Activate();
-        if (prism._hittingLightEmitter == null)
-        {
-            _hittingLightEmitter = go;
-        }
-        if (!_activeCrystals.Contains(go))
-        {
-            _activeCrystals.Add(go);
-        }
-    }
-
-    void ReflectLineRenderer(Vector3 position, Vector3 direction, int reflectionsLeft)
+    void ReflectLineRenderer(Vector3 position, Vector3 direction, int reflectionsLeft) //LineRenderer
     {
         if (reflectionsLeft == 0) return;
 
@@ -130,8 +107,8 @@ public class LightEmitter : MonoBehaviour
             GameObject go = hit.collider.gameObject;
             switch (go.tag)
             {
+
                 case "Mirror":
-                    _activeCrystals = null;
                     direction = Vector3.Reflect(direction, hit.normal);
                     position = hit.point;
                     _lineVertices.Add(position);
@@ -141,7 +118,8 @@ public class LightEmitter : MonoBehaviour
                     ActivateCrystal(hit.collider.gameObject);
                     position = hit.point;
                     _lineVertices.Add(position);
-                    return;
+                    ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
+                    break;
                 case "Player":
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     break;
@@ -158,7 +136,7 @@ public class LightEmitter : MonoBehaviour
                     
                     return;
                 default:
-                    _activeCrystals = null;
+                    _activePrism = null;
                     position = hit.point;
                     _lineVertices.Add(position);
                     return;
@@ -167,7 +145,7 @@ public class LightEmitter : MonoBehaviour
         }
         else
         {
-            _activeCrystals = null;
+            _activePrism = null;
             position += direction * _maxStepDistance;
             _lineVertices.Add(position);
             return;
@@ -216,18 +194,40 @@ public class LightEmitter : MonoBehaviour
         {
             position += direction * _maxStepDistance;
         }
-    }
+    } //Gizmos prediction
 
-    public void Activate()
+    void ActivateCrystal(GameObject go)
     {
-        _isActive = true;
-        
+        CrystalSwitch crystal;
+        crystal = go.GetComponent<CrystalSwitch>();
+        crystal.Activate();
+        crystal.SetLight(this.gameObject);
+        if (!_activeCrystals.Contains(go))
+        {
+            _activeCrystals.Add(go);
+        }
+
     }
 
-    public void Deactivate()
+    void ActivatePrism(GameObject go)
+    {
+        LightEmitter prism;
+        prism = go.GetComponent<LightEmitter>();
+        prism._isActive = true;
+        _activePrism = go;
+        prism._parentLightEmitter = this.gameObject;
+        if (!_activeCrystals.Contains(go))
+        {
+            _activeCrystals.Add(go);
+        }
+    }
+
+    public void DeactivatePrism()
     {
         _isActive = false;
+        _parentLightEmitter = null;
         _lineVertices.Clear();
+        _lineRenderer.positionCount = _lineVertices.Count;
         _lineRenderer.SetPositions(_lineVertices.ToArray());
     }
 }

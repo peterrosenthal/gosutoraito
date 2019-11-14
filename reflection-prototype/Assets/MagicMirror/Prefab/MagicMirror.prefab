@@ -263,9 +263,10 @@ GameObject:
   - component: {fileID: 6480290}
   - component: {fileID: 11497506}
   - component: {fileID: 2372380}
+  - component: {fileID: 3923000291083317208}
   m_Layer: 0
   m_Name: MirrorReflection
-  m_TagString: Mirror
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +302,7 @@ MeshCollider:
   m_GameObject: {fileID: 126772}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -356,6 +357,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3923000291083317208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!1 &604377132297251442
 GameObject:
   m_ObjectHideFlags: 0
