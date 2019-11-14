@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -107,7 +107,6 @@ public class LightEmitter : MonoBehaviour
             GameObject go = hit.collider.gameObject;
             switch (go.tag)
             {
-
                 case "Mirror":
                     direction = Vector3.Reflect(direction, hit.normal);
                     position = hit.point;
