@@ -1,5 +1,13 @@
 # Process
 
+## Progress Update - 11/21/19
+We've begun implementing our core mechanics and building out our base prototype. At this point the mirrors reflect the light beam and their rotation can also be set using our new interface. Clicking on the mirror enters edit mode, where the WASD keys are used to control the mirror's orientation. The ghosts' AI and behavior has also been programmed so that they follow the player whenever they are in sight and in range. Using the right mouse button, the player can reflect the beam of light if it is coming towards them, and this can then be used to destroy the ghosts. When a ghost dies, it instantiates an empty mirror pedestal, which can be grabbed and moved using the left mouse button.
+
+![Interface](./-3649246351960453042.jpg)
+![Map Sketch](./-5685741152280757890.jpg)
+![Sword Reflection](./ghostLight1.PNG)
+![Level Prototype](./ghostLight2.PNG)
+
 ## Character
 11/04/2019  
 ## Physical Traits
