@@ -1,9 +1,13 @@
 # Process
 
-## Progress Update - 11/21/19
+## Progress Update - 11/19/19
 We've begun implementing our core mechanics and user interface to control objects within the game. The interface for our game is very simple, consisting of a central crosshair (to know where the player is looking) and some icons in the corner which display the number of mirror shards they have, along with the respective buttons for using the mirrors/sword. At this point the mirrors reflect the light beam and their rotation can also be set using our new interface. Clicking on the mirror enters edit mode, where the WASD keys are used to control the mirror's orientation. The ghosts' AI and behavior has also been programmed so that they follow the player whenever they are in sight and in range. Using the right mouse button, the player can even reflect the beam of light using their sword if the light is coming towards them. This can then be used to destroy the ghosts by reflecting the light at them. When a ghost dies, it instantiates an empty mirror pedestal, which can be grabbed and moved using the left mouse button. Using the OnMouseOver function in Unity we'll also have some user feedback which relays to the player what game object are interactable by changing their material color or giving them a slight glow.
 
-![Shrine](./shrine.jpg)
+We also have our map built out. We have multiple models of our map floor with the hole for light in different places so we can switch up flooring during development. We have prefabs of walls and stairs that can be chained together to form our levels 1-3, including our lowest and last floor with the larger mirrors and game ending. 
+
+The beginning of the game includes the outside environment and level 0, the "tutorial level". The shrine for this level is fully designed and modeled with a hole in the shrine's ceiling for the first light interaction with the player. Adding this shrine to the chained floor prefabs will give us our entire game map; we can now fully design levels with the map in place. 
+
+![Shrine](./shrine.JPG)
 ![Interface](./-3649246351960453042.jpg)
 ![Map Sketch](./-5685741152280757890.jpg)
 ![Sword Reflection](./ghostLight1.PNG)
