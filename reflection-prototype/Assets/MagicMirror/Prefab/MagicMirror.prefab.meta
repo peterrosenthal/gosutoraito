@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 977d462d3da090443aa549827d636355
+guid: e5c758c6200f4ae45b885a3b238ad176
 labels:
 - Mirror
 - Reflection
@@ -8,9 +8,8 @@ labels:
 - Fogged
 - Film
 - Magic
-timeCreated: 1429139875
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
