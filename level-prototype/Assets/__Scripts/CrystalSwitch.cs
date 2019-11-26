@@ -35,13 +35,7 @@ public class CrystalSwitch : MonoBehaviour
     public void Deactivate()
     {
         _active = false;
-        _lightEmitter.GetComponent<LightEmitter>()._activeCrystals.Remove(this.gameObject);
         _lightEmitter = null;
         GetComponent<Renderer>().material.color = Color.white;
-    }
-
-    public void SetLight(GameObject go)
-    {
-        _lightEmitter = go;
     }
 }

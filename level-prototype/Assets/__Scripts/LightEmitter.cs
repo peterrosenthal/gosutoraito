@@ -39,7 +39,7 @@ public class LightEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isActive || _parentLightEmitter)
+        if (_isActive)
         {
             DrawLight();
             GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
@@ -70,31 +70,13 @@ public class LightEmitter : MonoBehaviour
         {
             GameObject go = _hit.collider.gameObject;
             string tag = go.tag;
-
-            if (tag == "Mirror" || tag == "Player" || tag == "Pedestal" || tag == "Ghost" || tag == "Hole")
-            {
-                ReflectLineRenderer(_lineVertices[0], this.transform.forward, _maxReflectionCount);
-            }
-            else
-            {
-                _lineVertices.Add(_hit.point);
-                switch (tag)
-                {
-                    case "Switch":
-                        ActivateCrystal(go);
-                        break;
-                    case "LightRay":
-                        ActivatePrism(go);
-                        break;
-                }
-            }
+            ReflectLineRenderer(_lineVertices[0], this.transform.forward, _maxReflectionCount);
         }
         else
         {
-            _activePrism = null;
-            _activeCrystals.Clear();
             _lineVertices.Add(this.transform.position + (this.transform.forward * _maxStepDistance));
         }
+        if (!_activeCrystals.Contains(_activePrism)) _activePrism = null;
         _lineRenderer.positionCount = _lineVertices.Count;
         _lineRenderer.SetPositions(_lineVertices.ToArray());
     }
@@ -161,14 +143,11 @@ public class LightEmitter : MonoBehaviour
                 case "LightRay":
                     position = hit.point;
                     _lineVertices.Add(position);
-                    if (!go.GetComponent<LightEmitter>()._isActive)
-                    {
-                        ActivatePrism(go);
-                    }
-                    
+                    ActivatePrism(go);
+                    ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     return;
                 default:
-                    _activePrism = null;
+                    
                     position = hit.point;
                     _lineVertices.Add(position);
                     return;
@@ -177,7 +156,6 @@ public class LightEmitter : MonoBehaviour
         }
         else
         {
-            _activePrism = null;
             position += direction * _maxStepDistance;
             _lineVertices.Add(position);
             return;
@@ -226,7 +204,7 @@ public class LightEmitter : MonoBehaviour
         CrystalSwitch crystal;
         crystal = go.GetComponent<CrystalSwitch>();
         crystal.Activate();
-        crystal.SetLight(this.gameObject);
+        crystal._lightEmitter = this.gameObject;
         if (!_activeCrystals.Contains(go))
         {
             _activeCrystals.Add(go);

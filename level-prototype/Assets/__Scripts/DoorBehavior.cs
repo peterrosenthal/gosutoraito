@@ -61,7 +61,7 @@ public class DoorBehavior : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            print("teleport");
+
         }
     }
 }
