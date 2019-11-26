@@ -33,13 +33,30 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (controllerScript.editingMirror) //things that happen while editing the mirror
         {
-            if (controllerScript.editingMirror) //Set Position
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            Vector3 currentRotation = _editMirror.transform.rotation.eulerAngles;
+            Vector3 newRotation = new Vector3(currentRotation.x + vertical, currentRotation.y + horizontal, currentRotation.z);
+            _editMirror.transform.rotation = Quaternion.Euler(newRotation);
+            
+            if (Input.GetKeyUp(KeyCode.E)) //save the edits
             {
                 controllerScript.editingMirror = false;
                 _editMirror = null;
             }
+            else if (Input.GetKeyUp(KeyCode.Q)) //cancel the edits
+            {
+                controllerScript.editingMirror = false;
+                _editMirror.transform.rotation = _previousMirrorRotation;
+                _editMirror = null;
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.E))
+        {
             if (mouseOverObject != null)
             {
                 switch (mouseOverObject.tag)
@@ -51,31 +68,9 @@ public class PlayerBehavior : MonoBehaviour
                         break;
                 }
             }
-            
-
         }
-
-        if (controllerScript.editingMirror)
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-
-            Vector3 currentRotation = _editMirror.transform.rotation.eulerAngles;
-            Vector3 newRotation = new Vector3(currentRotation.x + vertical, currentRotation.y + horizontal, currentRotation.z);
-            _editMirror.transform.rotation = Quaternion.Euler(newRotation);
-        }
-
-
-        if (controllerScript.editingMirror && Input.GetKey(KeyCode.Mouse1)) //Reset Position
-        {
-            controllerScript.editingMirror = false;
-            if (_editMirror != null)
-            {
-                _editMirror.transform.rotation = _previousMirrorRotation;
-            }
-            _editMirror = null;
-        }
-        else if (Input.GetKey(KeyCode.Mouse1))
+        
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             _holdingSword = true;
         }
