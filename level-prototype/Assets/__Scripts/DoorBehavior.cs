@@ -5,12 +5,11 @@ using UnityEngine;
 public class DoorBehavior : MonoBehaviour
 {
     public GameObject[] linkedSwitches;
-    private GameObject doorCube;
     private bool _isOpen = false;
 
     void Start()
     {
-        doorCube = transform.GetChild(0).gameObject;
+
     }
 
     // Update is called once per frame
@@ -46,14 +45,14 @@ public class DoorBehavior : MonoBehaviour
     private void Open()
     {
         _isOpen = true;
-        doorCube.GetComponent<Renderer>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
         GetComponent<BoxCollider>().isTrigger = true;
     }
 
     private void Close()
     {
         _isOpen = false;
-        doorCube.GetComponent<Renderer>().enabled = true;
+        GetComponent<Renderer>().enabled = true;
         GetComponent<BoxCollider>().isTrigger = false;
     }
 

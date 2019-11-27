@@ -434,7 +434,7 @@ namespace DigitalRuby.MagicMirror
 
             if (ReflectRenderer.sharedMaterial != null)
             {
-                Destroy(ReflectRenderer.sharedMaterial);
+                //Destroy(ReflectRenderer.sharedMaterial); //Commented to remove an error
             }
         }
 

@@ -33,6 +33,8 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (controllerScript.editingMirror) //things that happen while editing the mirror
         {
             float horizontal = Input.GetAxis("Horizontal");
@@ -54,21 +56,25 @@ public class PlayerBehavior : MonoBehaviour
                 _editMirror = null;
             }
         }
-        
-        if (Input.GetKeyUp(KeyCode.E))
+        else
         {
-            if (mouseOverObject != null)
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                switch (mouseOverObject.tag)
+                if (mouseOverObject != null)
                 {
-                    case "Mirror":
-                        controllerScript.editingMirror = true;
-                        _editMirror = mouseOverObject;
-                        _previousMirrorRotation = _editMirror.transform.rotation;
-                        break;
+                    switch (mouseOverObject.tag)
+                    {
+                        case "Mirror":
+                            controllerScript.editingMirror = true;
+                            _editMirror = mouseOverObject;
+                            _previousMirrorRotation = _editMirror.transform.rotation;
+                            break;
+                    }
                 }
             }
         }
+        
+        
         
         if (Input.GetKey(KeyCode.Mouse1))
         {
