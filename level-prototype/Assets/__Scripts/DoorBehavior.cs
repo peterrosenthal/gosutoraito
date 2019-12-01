@@ -5,7 +5,6 @@ using UnityEngine;
 public class DoorBehavior : MonoBehaviour
 {
     public GameObject[] linkedSwitches;
-    private bool _isOpen = false;
 
     void Start()
     {
@@ -44,14 +43,12 @@ public class DoorBehavior : MonoBehaviour
 
     private void Open()
     {
-        _isOpen = true;
         GetComponent<Renderer>().enabled = false;
         GetComponent<BoxCollider>().isTrigger = true;
     }
 
     private void Close()
     {
-        _isOpen = false;
         GetComponent<Renderer>().enabled = true;
         GetComponent<BoxCollider>().isTrigger = false;
     }
