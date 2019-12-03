@@ -11,6 +11,7 @@ TagManager:
   - Pedestal
   - Ghost
   - Hole
+  - Door
   layers:
   - Default
   - TransparentFX

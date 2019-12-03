@@ -34,7 +34,7 @@ public class PedestalScript : MonoBehaviour
     private void OnMouseDown()
     {
         //Edit
-        if (!locked && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
+        if (!locked && !PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
             rootNode.parent = PlayerBehavior.S.grabTransform;
             oldPos = transform.position;
@@ -45,7 +45,7 @@ public class PedestalScript : MonoBehaviour
     private void OnMouseUp()
     {
         //Exit edit
-        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
+        if (!PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
             rootNode.parent = originalParent;
             hasMirror = !hasMirror;

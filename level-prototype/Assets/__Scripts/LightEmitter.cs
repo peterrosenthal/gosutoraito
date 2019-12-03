@@ -22,11 +22,14 @@ public class LightEmitter : MonoBehaviour
     private Ray _ray;
     private RaycastHit _hit;
 
+    private PlayerBehavior player;
+
     private float _floorHeight; //For intializing pedestal positions
 
     // Start is called before the first frame update
     void Start()
     {
+        player = PlayerBehavior.S.GetComponent<PlayerBehavior>();
         _floorHeight = transform.parent.transform.position.y;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineVertices = new List<Vector3>(_maxReflectionCount + 1);
@@ -39,7 +42,7 @@ public class LightEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isActive || _parentLightEmitter)
+        if (_isActive)
         {
             DrawLight();
             GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
@@ -68,33 +71,13 @@ public class LightEmitter : MonoBehaviour
         _ray = new Ray(_lineVertices[0], this.transform.forward);
         if (Physics.Raycast(_ray, out _hit, _maxStepDistance))
         {
-            GameObject go = _hit.collider.gameObject;
-            string tag = go.tag;
-
-            if (tag == "Mirror" || tag == "Player" || tag == "Pedestal" || tag == "Ghost" || tag == "Hole")
-            {
-                ReflectLineRenderer(_lineVertices[0], this.transform.forward, _maxReflectionCount);
-            }
-            else
-            {
-                _lineVertices.Add(_hit.point);
-                switch (tag)
-                {
-                    case "Switch":
-                        ActivateCrystal(go);
-                        break;
-                    case "LightRay":
-                        ActivatePrism(go);
-                        break;
-                }
-            }
+            ReflectLineRenderer(_lineVertices[0], this.transform.forward, _maxReflectionCount);
         }
         else
         {
-            _activePrism = null;
-            _activeCrystals.Clear();
             _lineVertices.Add(this.transform.position + (this.transform.forward * _maxStepDistance));
         }
+        if (!_activeCrystals.Contains(_activePrism)) _activePrism = null;
         _lineRenderer.positionCount = _lineVertices.Count;
         _lineRenderer.SetPositions(_lineVertices.ToArray());
     }
@@ -112,9 +95,10 @@ public class LightEmitter : MonoBehaviour
             switch (go.tag)
             {
                 case "Mirror":
+                    direction = (hit.collider.transform.position - _lineVertices[_lineVertices.Count-1]).normalized; //Direction fixed to mirror center
                     direction = Vector3.Reflect(direction, hit.normal);
-                    //position = hit.point; //Direct Hit
                     position = hit.collider.transform.position; //Locks to mirror center
+                    //position = hit.point; //Direct Hit anywhere on mirror
                     _lineVertices.Add(position);
                     ReflectLineRenderer(position, direction, reflectionsLeft - 1); //Reflect line again
                     break;
@@ -125,15 +109,14 @@ public class LightEmitter : MonoBehaviour
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1); // the + direction makes it pass through collider
                     break;
                 case "Player": //Sword Reflection
-                    PlayerBehavior player = PlayerBehavior.S.GetComponent<PlayerBehavior>();
                     if (player.holdingSword && player.CanReflect(hit.point))
                     {
                         Vector3 origin = Camera.main.transform.position;
                         ray.origin = origin; //Ray origin is the camera
                         ray.direction = Camera.main.transform.forward;
-                        origin -= player.transform.up;
+                        origin -= player.transform.up; //Offset ray origin
                         origin += player.transform.forward;
-                        position = origin; //But the line render starts slightly below
+                        position = origin; //So the line render starts slightly below
                         _lineVertices.Add(position);
 
                         if (Physics.Raycast(ray, out hit, _maxStepDistance))
@@ -159,16 +142,15 @@ public class LightEmitter : MonoBehaviour
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     break;
                 case "LightRay":
-                    position = hit.point;
-                    _lineVertices.Add(position);
-                    if (!go.GetComponent<LightEmitter>()._isActive)
+                    /*position = hit.point;
+                    _lineVertices.Add(position);*/
+                    if (go != this.gameObject)
                     {
                         ActivatePrism(go);
                     }
-                    
+                    ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     return;
                 default:
-                    _activePrism = null;
                     position = hit.point;
                     _lineVertices.Add(position);
                     return;
@@ -177,7 +159,6 @@ public class LightEmitter : MonoBehaviour
         }
         else
         {
-            _activePrism = null;
             position += direction * _maxStepDistance;
             _lineVertices.Add(position);
             return;
@@ -201,8 +182,9 @@ public class LightEmitter : MonoBehaviour
             string tag = hit.collider.gameObject.tag;
             if (tag == "Mirror")
             {
+                direction = (hit.collider.transform.position - position).normalized;
                 direction = Vector3.Reflect(direction, hit.normal);
-                position = hit.collider.transform.position ;
+                position = hit.collider.transform.position;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawLine(startPos, position);
                 DrawPredictedReflectionPattern(position, direction, reflectionsRemaining - 1);
@@ -226,7 +208,7 @@ public class LightEmitter : MonoBehaviour
         CrystalSwitch crystal;
         crystal = go.GetComponent<CrystalSwitch>();
         crystal.Activate();
-        crystal.SetLight(this.gameObject);
+        crystal._lightEmitter = this.gameObject;
         if (!_activeCrystals.Contains(go))
         {
             _activeCrystals.Add(go);
@@ -245,12 +227,14 @@ public class LightEmitter : MonoBehaviour
         {
             _activeCrystals.Add(go);
         }
+        
     }
 
     public void DeactivatePrism()
     {
         _isActive = false;
         _parentLightEmitter = null;
+        _activeCrystals.Clear();
         _lineVertices.Clear();
         _lineRenderer.positionCount = _lineVertices.Count;
         _lineRenderer.SetPositions(_lineVertices.ToArray());
