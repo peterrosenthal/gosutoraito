@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     private bool _holdingSword;
     private Transform _thisCamera;
     public int mirrorCount = 0;
+    public int prismCount = 0;
     public Transform grabTransform;
     public GameObject mouseOverObject;
     public FirstPersonController controllerScript;

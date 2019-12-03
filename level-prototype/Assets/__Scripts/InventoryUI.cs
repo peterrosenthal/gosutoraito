@@ -7,11 +7,11 @@ public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI S;
     public Text mirrorText;
+    public Text prismText;
 
     void Start()
     {
         S = this;
-        mirrorText = GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -20,8 +20,9 @@ public class InventoryUI : MonoBehaviour
         
     }
 
-    public void UpdateMirrorText(int value)
+    public void UpdateInterfaceText()
     {
         mirrorText.text = "Mirrors: " + PlayerBehavior.S.mirrorCount.ToString();
+        prismText.text = "Prisms: " + PlayerBehavior.S.prismCount.ToString();
     }
 }

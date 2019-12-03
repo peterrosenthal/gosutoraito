@@ -10,6 +10,7 @@ public class GhostBehavior : MonoBehaviour
     private float startTime;
     private float y0;
 
+    public bool childGhost = false;
     public float floatHeight = 3f;
     public float floatSpeed = 5f;
     public float speed = 1f;
