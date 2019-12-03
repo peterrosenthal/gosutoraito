@@ -1,5 +1,23 @@
 # Process
 
+## Game Sounds and Music - 12/3/19
+### General
+- MP3 and WAV files from OpenGameArt.org
+### Player Sounds
+- Sword clang upon light reflection
+- Footsteps (for snow and stone)
+- Grunt when hurt by ghost
+### Enemy Sounds
+- Ghostly noises (hissing/laugher/moaning)
+### Global Elements
+- Ambient outdoor and indoor tracks
+- Glass shattering
+- Floor breaking
+- Door opening (wooden and sliding)
+- Placing/Taking pedestal objects
+- Activating crystal switch
+- Puzzle solution sound
+
 ## Level Design and Future Graphics
 Over break, we will focus on getting our samurai modelled and rigged to put into our game. We also want to keep working on our models for the different types of ghosts. The core mechanics are starting to come together and the scripts will be more refined to improved gameflow. During the break more levels will be prototyped to test out puzzle designs and mechanics. Now that our control interfaces have been established, we'll be able to start building up our base scenes into funcitoning levels.
 
