@@ -29,8 +29,8 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateInterfaceText()
     {
-        mirrorText.text = "Mirrors: " + PlayerBehavior.S.mirrorCount.ToString();
-        prismText.text = "Prisms: " + PlayerBehavior.S.prismCount.ToString();
+        mirrorText.text = PlayerBehavior.S.mirrorCount.ToString();
+        prismText.text = PlayerBehavior.S.prismCount.ToString();
     }
 
     void OnGUI()
