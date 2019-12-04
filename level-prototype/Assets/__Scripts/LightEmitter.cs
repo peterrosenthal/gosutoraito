@@ -253,7 +253,7 @@ public class LightEmitter : MonoBehaviour
         else
         {
             GameObject pedestalGO = Instantiate<GameObject>(pedestalPrefab, go.transform.position, Quaternion.identity);
-            PedestalScript pedestal = pedestalGO.transform.GetChild(1).GetComponent<PedestalScript>();
+            PedestalScript pedestal = pedestalGO.transform.GetChild(2).GetComponent<PedestalScript>();
             pedestal.originalParent = go.transform.parent.parent;
             pedestal.transform.parent.parent = pedestal.originalParent;
             pedestal.hasMirror = false;

@@ -9,6 +9,8 @@ public class PlayerBehavior : MonoBehaviour
     public static PlayerBehavior S;
     private bool _holdingSword;
     private Transform _thisCamera;
+
+
     public int mirrorCount = 0;
     public int prismCount = 0;
     public Transform grabTransform;
@@ -18,6 +20,13 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject _editMirror;
     public Quaternion _previousMirrorRotation;
 
+    public int selectedItem = 0;
+
+    public enum equipment
+    {
+        mirror,
+        prism
+    }
 
     public bool holdingSword
     {
@@ -66,6 +75,7 @@ public class PlayerBehavior : MonoBehaviour
                     switch (mouseOverObject.tag)
                     {
                         case "Mirror":
+                        case "LightRay":    
                             controllerScript.editingMirror = true;
                             _editMirror = mouseOverObject;
                             _previousMirrorRotation = _editMirror.transform.rotation;
