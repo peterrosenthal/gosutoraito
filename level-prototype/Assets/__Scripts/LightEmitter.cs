@@ -263,4 +263,20 @@ public class LightEmitter : MonoBehaviour
         }
         
     }
+
+    private void OnMouseOver()
+    {
+        if (PlayerBehavior.S.mouseOverObject != gameObject)
+        {
+            PlayerBehavior.S.mouseOverObject = gameObject;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (PlayerBehavior.S.mouseOverObject == gameObject)
+        {
+            PlayerBehavior.S.mouseOverObject = null;
+        }
+    }
 }

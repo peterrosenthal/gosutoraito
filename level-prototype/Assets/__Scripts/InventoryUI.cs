@@ -36,14 +36,14 @@ public class InventoryUI : MonoBehaviour
     void OnGUI()
     {
         Vector3 pos = selector.rectTransform.position;
-        pos.y += Input.mouseScrollDelta.y * 30f;
-        pos.y = Mathf.Clamp(pos.y, selectorMin, selectorMax);
-        if (pos.y == selectorMax)
+        if (Input.mouseScrollDelta.y > 0)
         {
-            PlayerBehavior.S.selectedItem = (int) PlayerBehavior.equipment.mirror;
+            pos.y = selectorMax;
+            PlayerBehavior.S.selectedItem = (int)PlayerBehavior.equipment.mirror;
         }
-        else
+        else if (Input.mouseScrollDelta.y < 0)
         {
+            pos.y = selectorMin;
             PlayerBehavior.S.selectedItem = (int)PlayerBehavior.equipment.prism;
         }
         selector.rectTransform.position = pos;
