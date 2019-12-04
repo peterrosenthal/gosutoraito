@@ -57,9 +57,9 @@ public class PedestalScript : MonoBehaviour
     private void OnMouseUp()
     {
         //Exit edit
+        rootNode.parent = originalParent;
         if (!PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
-            //rootNode.parent = originalParent;
             if (hasMirror) //Get Mirror
             {
                 hasMirror = false;
@@ -69,7 +69,7 @@ public class PedestalScript : MonoBehaviour
             else if (hasPrism) //Get Prism
             {
                 hasPrism = false;
-                PlayerBehavior.S.mirrorCount++;
+                PlayerBehavior.S.prismCount++;
                 InventoryUI.S.UpdateInterfaceText();
             }
             else //Place  object

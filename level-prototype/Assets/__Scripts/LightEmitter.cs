@@ -257,6 +257,7 @@ public class LightEmitter : MonoBehaviour
             pedestal.originalParent = go.transform.parent.parent;
             pedestal.transform.parent.parent = pedestal.originalParent;
             pedestal.hasMirror = false;
+            pedestal.hasPrism = false;
             pedestal.locked = false;
             Destroy(go);
         }

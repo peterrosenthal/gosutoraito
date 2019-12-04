@@ -15,7 +15,7 @@ public class CrystalSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_lightEmitter != null && !_lightEmitter.GetComponent<LightEmitter>()._activeCrystals.Contains(this.gameObject))
+        if (!_lightEmitter.activeInHierarchy || (_lightEmitter != null && !_lightEmitter.GetComponent<LightEmitter>()._activeCrystals.Contains(this.gameObject)))
         {
             Deactivate();
         }
