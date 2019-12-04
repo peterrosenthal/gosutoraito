@@ -6,6 +6,7 @@ public class LightEmitter : MonoBehaviour
 {
     public bool debug;
     public GameObject pedestalPrefab;
+    public GameObject prismPrefab;
     
 
     public int _maxReflectionCount = 5;
@@ -242,12 +243,40 @@ public class LightEmitter : MonoBehaviour
 
     private void KillGhost(GameObject go)
     {
-        GameObject pedestalGO = Instantiate<GameObject>(pedestalPrefab, go.transform.position, Quaternion.identity);
-        PedestalScript pedestal = pedestalGO.transform.GetChild(1).GetComponent<PedestalScript>();
-        pedestal.originalParent = go.transform.parent.parent;
-        pedestal.transform.parent.parent = pedestal.originalParent; 
-        pedestal.hasMirror = false;
-        pedestal.locked = false;
-        Destroy(go);
+        GhostBehavior ghost = go.GetComponent<GhostBehavior>();
+        if(ghost.childGhost)
+        {
+            //Instantiate Prism
+            GameObject prismGO = Instantiate<GameObject>(prismPrefab, go.transform.position, Quaternion.identity);
+            Destroy(go);
+        }
+        else
+        {
+            GameObject pedestalGO = Instantiate<GameObject>(pedestalPrefab, go.transform.position, Quaternion.identity);
+            PedestalScript pedestal = pedestalGO.transform.GetChild(2).GetComponent<PedestalScript>();
+            pedestal.originalParent = go.transform.parent.parent;
+            pedestal.transform.parent.parent = pedestal.originalParent;
+            pedestal.hasMirror = false;
+            pedestal.hasPrism = false;
+            pedestal.locked = false;
+            Destroy(go);
+        }
+        
+    }
+
+    private void OnMouseOver()
+    {
+        if (PlayerBehavior.S.mouseOverObject != gameObject)
+        {
+            PlayerBehavior.S.mouseOverObject = gameObject;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (PlayerBehavior.S.mouseOverObject == gameObject)
+        {
+            PlayerBehavior.S.mouseOverObject = null;
+        }
     }
 }

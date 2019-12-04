@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MirrorShard : MonoBehaviour
+public class PrismPickup : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class MirrorShard : MonoBehaviour
 
     private void OnMouseDown()
     {
-        PlayerBehavior.S.mirrorCount++;
+        PlayerBehavior.S.prismCount++;
         InventoryUI.S.UpdateInterfaceText();
         Destroy(gameObject);
     }

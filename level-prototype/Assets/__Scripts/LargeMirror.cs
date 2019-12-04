@@ -10,7 +10,9 @@ public class LargeMirror : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
+            AudioManager.S.shatterSound.Play();
             SpawnShards();
+            
             Destroy(gameObject);
         }
     }

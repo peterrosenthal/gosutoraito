@@ -7,11 +7,18 @@ public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI S;
     public Text mirrorText;
+    public Text prismText;
+    public Image selector;
+
+    private static float selectorMax;
+    private static float selectorMin;
+
 
     void Start()
     {
         S = this;
-        mirrorText = GetComponent<Text>();
+        selectorMax = mirrorText.rectTransform.position.y + 10;
+        selectorMin = prismText.rectTransform.position.y + 10;
     }
 
     // Update is called once per frame
@@ -20,8 +27,25 @@ public class InventoryUI : MonoBehaviour
         
     }
 
-    public void UpdateMirrorText(int value)
+    public void UpdateInterfaceText()
     {
-        mirrorText.text = "Mirrors: " + PlayerBehavior.S.mirrorCount.ToString();
+        mirrorText.text = PlayerBehavior.S.mirrorCount.ToString();
+        prismText.text = PlayerBehavior.S.prismCount.ToString();
+    }
+
+    void OnGUI()
+    {
+        Vector3 pos = selector.rectTransform.position;
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            pos.y = selectorMax;
+            PlayerBehavior.S.selectedItem = (int)PlayerBehavior.equipment.mirror;
+        }
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            pos.y = selectorMin;
+            PlayerBehavior.S.selectedItem = (int)PlayerBehavior.equipment.prism;
+        }
+        selector.rectTransform.position = pos;
     }
 }
