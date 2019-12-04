@@ -18,6 +18,14 @@
 - Activating crystal switch
 - Puzzle solution sound
 
+### Other Attributes Needed
+- Seperate background audio for in the stone puzzle rooms and in the shrine (indoor tracks)
+- Shrine audio speeds up as player falls through ground, changes on stone room entry
+
+### Main Menu
+- Grain and noise on the main menu
+- Clicking noise for selecting
+
 ## Level Design and Future Graphics
 Over break, we will focus on getting our samurai modelled and rigged to put into our game. We also want to keep working on our models for the different types of ghosts. The core mechanics are starting to come together and the scripts will be more refined to improved gameflow. During the break more levels will be prototyped to test out puzzle designs and mechanics. Now that our control interfaces have been established, we'll be able to start building up our base scenes into funcitoning levels.
 
