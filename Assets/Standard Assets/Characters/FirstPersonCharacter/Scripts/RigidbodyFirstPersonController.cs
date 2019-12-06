@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEditor;
 using UnityStandardAssets.CrossPlatformInput;
+
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -88,6 +90,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+        private bool editMode = false;
+        private GameObject currentLightEmitter;
+
+        private RaycastHit mouseTarget;
 
 
         public Vector3 Velocity
@@ -117,12 +123,37 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        private void ToggleEditMode(Transform target)
+        {
+            if (!editMode && target.gameObject.tag == "Pedestal")
+            {
+                editMode = true;
+                //Get reference to light emitter
+                GameObject pedestal = target.parent.gameObject; //Pedestal Object
+                //currentLightEmitter = pedestal.GetComponent<PedestalScript>();
+                //Move Camera
+                cam.transform.SetParent(target.parent);
+                Vector3 newPos = target.position;
+                newPos.y += 5;
+                cam.transform.localPosition = newPos;
+                cam.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
+            }
+            else
+            {
+                editMode = false;
+                //Reset Camera
+                cam.transform.SetParent(target);
+                cam.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            }
+        }
+
 
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
+            
         }
 
 
@@ -130,60 +161,83 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
-            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && !editMode)
             {
                 m_Jump = true;
+            }
+
+            int mouseInput = GetMouseInput();
+            if (mouseInput == 0)
+            {
+                /*GameObject go = mouseTarget.collider.gameObject;
+                if (go.tag == "Mirror")
+                {
+                    go.transform.parent.transform.Rotate(Vector3.up, -15f);
+                }*/
+            }
+            else if (mouseInput == 1) //TODO: Hold up sword
+            {
+
+
+                /*GameObject go = mouseTarget.collider.gameObject;
+                if (go.tag == "Mirror")
+                {
+                    go.transform.parent.transform.Rotate(Vector3.up, 15f);
+                }*/
             }
         }
 
 
         private void FixedUpdate()
         {
-            GroundCheck();
-            Vector2 input = GetInput();
-
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if (!editMode)
             {
-                // always move along the camera forward as it is the direction that it being aimed at
-                Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
-                desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
+                GroundCheck();
+                Vector2 input = GetInput();
 
-                desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
-                desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
-                desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
-                if (m_RigidBody.velocity.sqrMagnitude <
-                    (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
+                if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
+                    // always move along the camera forward as it is the direction that it being aimed at
+                    Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+                    desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
+
+                    desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
+                    desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
+                    desiredMove.y = desiredMove.y * movementSettings.CurrentTargetSpeed;
+                    if (m_RigidBody.velocity.sqrMagnitude <
+                        (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
+                    {
+                        m_RigidBody.AddForce(desiredMove * SlopeMultiplier(), ForceMode.Impulse);
+                    }
                 }
-            }
 
-            if (m_IsGrounded)
-            {
-                m_RigidBody.drag = 5f;
+                if (m_IsGrounded)
+                {
+                    m_RigidBody.drag = 5f;
 
-                if (m_Jump)
+                    if (m_Jump)
+                    {
+                        m_RigidBody.drag = 0f;
+                        m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
+                        m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                        m_Jumping = true;
+                    }
+
+                    if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
+                    {
+                        m_RigidBody.Sleep();
+                    }
+                }
+                else
                 {
                     m_RigidBody.drag = 0f;
-                    m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
-                    m_Jumping = true;
+                    if (m_PreviouslyGrounded && !m_Jumping)
+                    {
+                        StickToGroundHelper();
+                    }
                 }
-
-                if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
-                {
-                    m_RigidBody.Sleep();
-                }
+                m_Jump = false;
             }
-            else
-            {
-                m_RigidBody.drag = 0f;
-                if (m_PreviouslyGrounded && !m_Jumping)
-                {
-                    StickToGroundHelper();
-                }
-            }
-            m_Jump = false;
         }
 
 
@@ -208,6 +262,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        private int GetMouseInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Ray cursorRay = new Ray(cam.transform.position, cam.transform.forward);
+                RaycastHit hit;
+                if (editMode)
+                {
+                    ToggleEditMode(transform);
+                }
+                else if (Physics.Raycast(cursorRay, out hit, 5f))
+                {
+                    mouseTarget = hit;
+                    ToggleEditMode(mouseTarget.transform);
+                }
+                return 0;
+            }
+            return -1;
+        }
 
         private Vector2 GetInput()
         {
@@ -229,8 +302,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             // get the rotation before it's changed
             float oldYRotation = transform.eulerAngles.y;
+            
 
-            mouseLook.LookRotation (transform, cam.transform);
+            if (!editMode)
+            {
+                mouseLook.LookRotation(transform, cam.transform);
+            }
+            else
+            {
+                RaycastHit cursorHit;
+                cursorHit = mouseLook.EditLookRotation(transform, cam.transform);
+
+            }
 
             if (m_IsGrounded || advancedSettings.airControl)
             {

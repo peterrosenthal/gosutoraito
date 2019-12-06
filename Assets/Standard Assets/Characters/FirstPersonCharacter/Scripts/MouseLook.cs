@@ -55,6 +55,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCursorLock();
         }
 
+        public RaycastHit EditLookRotation(Transform character, Transform camera)
+        {
+            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+
+            m_CameraTargetRot *= Quaternion.Euler(-xRot, yRot, 0f);
+            
+            if (clampVerticalRotation) m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);
+
+            //Debug.Log(m_CameraTargetRot);
+
+            if (smooth)
+            {
+                camera.localRotation = Quaternion.Slerp(camera.localRotation, m_CameraTargetRot,
+                    smoothTime * Time.deltaTime);
+            }
+            else
+            {
+                camera.localRotation = m_CameraTargetRot;
+            }
+
+            UpdateCursorLock();
+
+            Ray camForward = new Ray(camera.position, camera.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(camForward, out hit, 100))
+            {
+                return hit;
+            }
+
+            return new RaycastHit();
+            
+        }
+
         public void SetCursorLock(bool value)
         {
             lockCursor = value;
@@ -86,12 +120,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (m_cursorIsLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
             }
             else if (!m_cursorIsLocked)
             {
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
             }
         }
 

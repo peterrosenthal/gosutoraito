@@ -5,15 +5,32 @@ using UnityEngine;
 public class mirrorBreak : MonoBehaviour
 {
     public GameObject brokenMirror;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    void Update()
+    Animator anim;
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
+
+    }
+
+    private void OnMouseOver()
+    {
+        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f && Input.GetMouseButton(1))
         {
-            Instantiate(brokenMirror, transform.position, Quaternion.Euler(-28.909f, -90, 90));
-            Destroy(this.gameObject);
+            BreakMirror();
+            //PlayerBehavior.S.mouseOverObject = gameObject;
         }
+        anim.SetBool("ByMirror", true);
+    }
+
+    private void OnMouseExit()
+    {
+        anim.SetBool("ByMirror", false);
+    }
+
+    public void BreakMirror()
+    {
+        Instantiate(brokenMirror, transform.position + transform.forward, Quaternion.identity);
+        Destroy(this.gameObject);
+        anim.SetBool("ByMirror", false);
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3425667682681576134}
   - component: {fileID: 5994547635009093318}
   - component: {fileID: 4142636920297809111}
+  - component: {fileID: 429880751485366838}
   m_Layer: 0
   m_Name: mirror2
   m_TagString: Untagged
@@ -111,6 +112,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &429880751485366838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186948259391785797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f52939a0505f849abf135cab135f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5146177960893024883
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +137,7 @@ GameObject:
   - component: {fileID: 985746262258613631}
   - component: {fileID: 3268075346587523606}
   - component: {fileID: 667853896357501382}
+  - component: {fileID: 4825669848421235518}
   m_Layer: 0
   m_Name: mirror3
   m_TagString: Untagged
@@ -222,6 +236,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4825669848421235518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146177960893024883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f52939a0505f849abf135cab135f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7507731312287183396
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +271,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7507731312287183396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.289, y: 0, z: 24.05}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9158857884564159291}
@@ -255,7 +281,7 @@ Transform:
   - {fileID: 6045607225700339182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &8372402742750582303
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +295,7 @@ GameObject:
   - component: {fileID: 576146449702724419}
   - component: {fileID: 496965633930798393}
   - component: {fileID: 2025077626406344100}
+  - component: {fileID: 5216095460108360450}
   m_Layer: 0
   m_Name: mirror1
   m_TagString: Untagged
@@ -367,6 +394,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5216095460108360450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372402742750582303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f52939a0505f849abf135cab135f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8635056412449479112
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +419,7 @@ GameObject:
   - component: {fileID: 8153673054442389894}
   - component: {fileID: 4834465148495530726}
   - component: {fileID: 8335418915354791445}
+  - component: {fileID: 7083313023445427287}
   m_Layer: 0
   m_Name: mirror4
   m_TagString: Untagged
@@ -478,3 +518,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7083313023445427287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635056412449479112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f52939a0505f849abf135cab135f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
