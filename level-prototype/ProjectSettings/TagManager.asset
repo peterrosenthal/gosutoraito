@@ -12,6 +12,9 @@ TagManager:
   - Ghost
   - Hole
   - Door
+  - LargeMirror
+  - Test
+  - StartPedestal
   layers:
   - Default
   - TransparentFX

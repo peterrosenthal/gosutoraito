@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     public static PlayerBehavior S;
     private bool _holdingSword;
     private Transform _thisCamera;
+    private Animator anim;
 
 
     public int mirrorCount = 0;
@@ -34,10 +35,13 @@ public class PlayerBehavior : MonoBehaviour
     }
     void Start()
     {
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
+
         S = this;
         controllerScript = GetComponent<FirstPersonController>();
         _thisCamera = transform.GetChild(0);
         grabTransform = transform.GetChild(1);
+
     }
 
     // Update is called once per frame
@@ -47,23 +51,41 @@ public class PlayerBehavior : MonoBehaviour
 
         if (controllerScript.editingMirror) //things that happen while editing the mirror
         {
+            anim.SetBool("nearPedestal", false);
+            anim.SetBool("nearGhostPedestal", false);
+
+            anim.SetBool("isEditingObjectOnPedestal", true);
+
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
             Vector3 currentRotation = _editMirror.transform.rotation.eulerAngles;
-            Vector3 newRotation = new Vector3(currentRotation.x + vertical, currentRotation.y + horizontal, currentRotation.z);
+            Vector3 newRotation = currentRotation;
+            if (_editMirror.tag == "Mirror")
+            {
+                newRotation = new Vector3(currentRotation.x + vertical, currentRotation.y + horizontal, currentRotation.z);
+            }
+            else if (_editMirror.tag == "LightRay")
+            {
+                newRotation = new Vector3(currentRotation.x - vertical, currentRotation.y + horizontal, currentRotation.z);
+            }
+            
             _editMirror.transform.rotation = Quaternion.Euler(newRotation);
             
             if (Input.GetKeyUp(KeyCode.E)) //save the edits
             {
                 controllerScript.editingMirror = false;
                 _editMirror = null;
+                anim.SetBool("isEditingObjectOnPedestal", false);
+
             }
             else if (Input.GetKeyUp(KeyCode.Q)) //cancel the edits
             {
                 controllerScript.editingMirror = false;
                 _editMirror.transform.rotation = _previousMirrorRotation;
                 _editMirror = null;
+                anim.SetBool("isEditingObjectOnPedestal", false);
+
             }
         }
         else
@@ -79,6 +101,21 @@ public class PlayerBehavior : MonoBehaviour
                             controllerScript.editingMirror = true;
                             _editMirror = mouseOverObject;
                             _previousMirrorRotation = _editMirror.transform.rotation;
+                            break;
+                    }
+                }
+            }
+            if (Input.GetMouseButton(1))
+            {
+                if (mouseOverObject != null)
+                {
+                    switch (mouseOverObject.tag)
+                    {
+                        case "LargeMirror":
+                            AudioManager.S.shatterSound.Play();
+                            mirrorBreak m = mouseOverObject.GetComponent<mirrorBreak>();
+                            m.BreakMirror();
+                            Destroy(mouseOverObject);
                             break;
                     }
                 }

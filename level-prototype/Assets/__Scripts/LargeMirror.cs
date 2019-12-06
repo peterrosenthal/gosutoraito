@@ -6,18 +6,15 @@ public class LargeMirror : MonoBehaviour
 {
     public GameObject shardPrefab;
     public int shards = 2;
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
         if(Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
-            AudioManager.S.shatterSound.Play();
-            SpawnShards();
-            
-            Destroy(gameObject);
+            PlayerBehavior.S.mouseOverObject = gameObject;
         }
     }
 
-    private void SpawnShards()
+    public void BreakMirror()
     {
         //PlayerBehavior.S.mirrorCount += shards;
         //Instatiate shards at this position

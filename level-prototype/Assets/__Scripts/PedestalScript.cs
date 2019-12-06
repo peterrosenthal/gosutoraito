@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PedestalScript : MonoBehaviour
 {
-    private Transform rootNode;
+    public Transform rootNode;
     public Transform originalParent;
     public GameObject thisMirror;
     public GameObject thisPrism;
@@ -43,21 +43,11 @@ public class PedestalScript : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
-    {
-        //Edit
-        if (!locked && !PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
-        {
-            rootNode.parent = PlayerBehavior.S.grabTransform;
-            oldPos = transform.position;
-        }
-        
-    }
 
     private void OnMouseUp()
     {
         //Exit edit
-        rootNode.parent = originalParent;
+        //rootNode.parent = originalParent;
         if (!PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
             if (hasMirror) //Get Mirror
@@ -95,13 +85,30 @@ public class PedestalScript : MonoBehaviour
     {
         if (!locked && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            
+
+            //GetComponent<Renderer>().material.color = Color.red;
+            if (Input.GetMouseButton(1))
+            {
+                //GetComponent<Renderer>().material.color = Color.white;
+                rootNode.parent = PlayerBehavior.S.grabTransform;
+            }
+            else
+            {
+                rootNode.parent = originalParent;
+            }
         }
     }
 
     private void OnMouseExit()
     {
-        GetComponent<Renderer>().material.color = Color.white;
+        //GetComponent<Renderer>().material.color = Color.white;
+        if (!Input.GetMouseButton(1))
+        {
+            rootNode.parent = originalParent;
+            
+        }
+        
     }
     
 }

@@ -103,6 +103,12 @@ public class LightEmitter : MonoBehaviour
                     _lineVertices.Add(position);
                     ReflectLineRenderer(position, direction, reflectionsLeft - 1); //Reflect line again
                     break;
+                case "LargeMirror":
+                    direction = Vector3.Reflect(direction, hit.normal);
+                    position = hit.point; //Direct Hit anywhere on mirror
+                    _lineVertices.Add(position);
+                    ReflectLineRenderer(position, direction, reflectionsLeft - 1); //Reflect line again
+                    break;
                 case "Switch":
                     ActivateCrystal(hit.collider.gameObject);
                     position = hit.point;
@@ -133,6 +139,7 @@ public class LightEmitter : MonoBehaviour
                     {
                         ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     }
+
                     break;
                 case "Pedestal":
                 case "Hole":

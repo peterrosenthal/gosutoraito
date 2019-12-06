@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MirrorBehavior : MonoBehaviour
 {
-
+    Animator anim;
     void Start()
     {
-        
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class MirrorBehavior : MonoBehaviour
         if (PlayerBehavior.S.mouseOverObject != gameObject)
         {
             PlayerBehavior.S.mouseOverObject = gameObject;
+            
         }
     }
 
@@ -31,5 +32,6 @@ public class MirrorBehavior : MonoBehaviour
         {
             PlayerBehavior.S.mouseOverObject = null;
         }
+
     }
 }
