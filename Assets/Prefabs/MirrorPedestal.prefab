@@ -29,7 +29,7 @@ MonoBehaviour:
   originalParent: {fileID: 0}
   thisMirror: {fileID: 1845597792908141047}
   thisPrism: {fileID: 1350464826417824875}
-  locked: 0
+  locked: 1
   oldPos: {x: 0, y: 0, z: 0}
 --- !u!1 &8353697752622453403
 GameObject:

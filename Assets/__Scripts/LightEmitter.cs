@@ -17,6 +17,7 @@ public class LightEmitter : MonoBehaviour
     public List<GameObject> _activeCrystals;
     public GameObject _activePrism;
     public GameObject _parentLightEmitter;
+    public bool _startSwitchOn;
 
     private LineRenderer _lineRenderer;
     private List<Vector3> _lineVertices;
@@ -41,12 +42,12 @@ public class LightEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isActive)
+        if (_isActive || _startSwitchOn)
         {
             DrawLight();
             GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
         }
-        if (_parentLightEmitter != null && _parentLightEmitter.GetComponent<LightEmitter>()._activePrism != this.gameObject) 
+        if (_parentLightEmitter != null  && _parentLightEmitter.GetComponent<LightEmitter>()._activePrism != this.gameObject)
         {
             DeactivatePrism();
         }
@@ -111,6 +112,7 @@ public class LightEmitter : MonoBehaviour
                     ActivateCrystal(hit.collider.gameObject);
                     position = hit.point;
                     _lineVertices.Add(position);
+                    if (hit.collider.gameObject.GetComponent<CrystalSwitch>()._startSwitch) return;
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1); // the + direction makes it pass through collider
                     break;
                 case "Player": //Sword Reflection

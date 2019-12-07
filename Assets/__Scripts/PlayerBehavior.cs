@@ -47,8 +47,6 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (controllerScript.editingMirror) //things that happen while editing the mirror
         {
             anim.SetBool("nearPedestal", false);
@@ -112,7 +110,7 @@ public class PlayerBehavior : MonoBehaviour
                     switch (mouseOverObject.tag)
                     {
                         case "LargeMirror":
-                            AudioManager.S.shatterSound.Play();
+                            
                             mirrorBreak m = mouseOverObject.GetComponent<mirrorBreak>();
                             m.BreakMirror();
                             Destroy(mouseOverObject);

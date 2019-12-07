@@ -5,11 +5,16 @@ using UnityEngine;
 public class CrystalSwitch : MonoBehaviour
 {
     public bool _active = false;
+    public bool _startSwitch = false;
     public GameObject _lightEmitter;
+    public GameObject _startLight;
 
     void Start()
     {
-        
+        if (_startSwitch)
+        {
+            _startLight = GameObject.Find("StartLight");
+        }
     }
 
     // Update is called once per frame
@@ -30,6 +35,7 @@ public class CrystalSwitch : MonoBehaviour
     public void Activate()
     {
         _active = true;
+        if (_startSwitch && _startLight) _startLight.GetComponent<LightEmitter>()._startSwitchOn = true;
         GetComponent<Renderer>().material.color = Color.red;
     }
 

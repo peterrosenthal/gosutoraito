@@ -29,6 +29,7 @@ public class mirrorBreak : MonoBehaviour
 
     public void BreakMirror()
     {
+        AudioManager.S.shatterSound.Play();
         Instantiate(brokenMirror, transform.position + transform.forward, Quaternion.identity);
         Destroy(this.gameObject);
         anim.SetBool("ByMirror", false);

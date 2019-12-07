@@ -17,7 +17,7 @@ public class ui : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //treee = GameObject.Find("treee");
+        treee = GameObject.Find("treee");
         anim = GetComponent<Animator>();
         
     }
@@ -25,10 +25,10 @@ public class ui : MonoBehaviour
     // This script will likely need access to your other scripts to check conditionals, I just dont have them in the file I'm working in :(
     void Update()
     {
-        /*if (!treee.activeInHierarchy)
+        if (!treee.activeInHierarchy)
         {
             anim.SetBool("shrineEntered", true);
-        }*/
+        }
 
     }
 }
