@@ -11,10 +11,12 @@ public class floorBreak : MonoBehaviour
     CrystalSwitch crystal;
     GameObject treee;
     GameObject terrain;
+    Light mainLight;
 
     // Start is called before the first frame update
     void Start()
     {
+        mainLight = GameObject.Find("mainLight").GetComponent<Light>();
         terrain = GameObject.Find("TerrainGroup_0");
         treee = GameObject.Find("treee");
         floor = GameObject.Find("fullMat");
@@ -35,6 +37,7 @@ public class floorBreak : MonoBehaviour
             //Make player fall
             PlayerBehavior.S.controllerScript.editingMirror = false;
             //Change Music
+            mainLight.intensity = 3f;
             AudioManager.S.ChangeMusic();
             StartCoroutine("fade");
         }
