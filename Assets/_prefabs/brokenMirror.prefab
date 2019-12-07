@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5994547635009093318}
   - component: {fileID: 4142636920297809111}
   - component: {fileID: 429880751485366838}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mirror2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 3268075346587523606}
   - component: {fileID: 667853896357501382}
   - component: {fileID: 4825669848421235518}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mirror3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 496965633930798393}
   - component: {fileID: 2025077626406344100}
   - component: {fileID: 5216095460108360450}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mirror1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 4834465148495530726}
   - component: {fileID: 8335418915354791445}
   - component: {fileID: 7083313023445427287}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mirror4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

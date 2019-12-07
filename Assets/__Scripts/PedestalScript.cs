@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PedestalScript : MonoBehaviour
 {
+    Animator anim;
     public Transform rootNode;
     public Transform originalParent;
     public GameObject thisMirror;
@@ -29,8 +30,11 @@ public class PedestalScript : MonoBehaviour
 
     public bool locked = true;
     public Vector3 oldPos;
+    private bool moving = false;
+
     void Start()
     {
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
         rootNode = transform.parent;
         originalParent = rootNode.parent;
         thisMirror = transform.parent.GetChild(0).gameObject;
@@ -40,7 +44,10 @@ public class PedestalScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (moving && !Input.GetMouseButton(1))
+        {
+            rootNode.parent = originalParent;
+        }
     }
 
 
@@ -55,12 +62,16 @@ public class PedestalScript : MonoBehaviour
                 hasMirror = false;
                 PlayerBehavior.S.mirrorCount++;
                 InventoryUI.S.UpdateInterfaceText();
+                AudioManager.S.mirrorShard.Play();
+
             }
             else if (hasPrism) //Get Prism
             {
                 hasPrism = false;
                 PlayerBehavior.S.prismCount++;
                 InventoryUI.S.UpdateInterfaceText();
+                AudioManager.S.mirrorShard.Play();
+
             }
             else //Place  object
             {
@@ -69,12 +80,16 @@ public class PedestalScript : MonoBehaviour
                     hasMirror = true;
                     PlayerBehavior.S.mirrorCount--;
                     InventoryUI.S.UpdateInterfaceText();
+                    AudioManager.S.mirrorShard.Play();
+
                 }
                 else if (PlayerBehavior.S.selectedItem == 1 && PlayerBehavior.S.prismCount > 0)
                 {
                     hasPrism = true;
                     PlayerBehavior.S.prismCount--;
                     InventoryUI.S.UpdateInterfaceText();
+                    AudioManager.S.mirrorShard.Play();
+
                 }
             }
         }
@@ -83,15 +98,18 @@ public class PedestalScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (!locked && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
+        if (locked && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f) //Normal Pedestal
         {
-            
-
-            //GetComponent<Renderer>().material.color = Color.red;
+            anim.SetBool("nearPedestal", true);
+        }
+        else if (!locked && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f) //Ghost Pedestal
+        {
+            anim.SetBool("nearGhostPedestal", true);
             if (Input.GetMouseButton(1))
             {
                 //GetComponent<Renderer>().material.color = Color.white;
                 rootNode.parent = PlayerBehavior.S.grabTransform;
+                moving = true;
             }
             else
             {
@@ -102,13 +120,13 @@ public class PedestalScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        //GetComponent<Renderer>().material.color = Color.white;
-        if (!Input.GetMouseButton(1))
+        if (!moving)
         {
-            rootNode.parent = originalParent;
+            anim.SetBool("nearGhostPedestal", false);
+            anim.SetBool("nearPedestal", false);
             
         }
-        
+
     }
     
 }

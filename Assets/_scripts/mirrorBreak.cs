@@ -14,12 +14,15 @@ public class mirrorBreak : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f && Input.GetMouseButton(1))
+        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
-            BreakMirror();
-            //PlayerBehavior.S.mouseOverObject = gameObject;
+            anim.SetBool("ByMirror", true);
+            if (Input.GetMouseButton(1))
+            {
+                BreakMirror();
+            }
         }
-        anim.SetBool("ByMirror", true);
+        
     }
 
     private void OnMouseExit()
@@ -29,9 +32,9 @@ public class mirrorBreak : MonoBehaviour
 
     public void BreakMirror()
     {
+        anim.SetBool("ByMirror", false);
         AudioManager.S.shatterSound.Play();
         Instantiate(brokenMirror, transform.position + transform.forward, Quaternion.identity);
         Destroy(this.gameObject);
-        anim.SetBool("ByMirror", false);
     }
 }

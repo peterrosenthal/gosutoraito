@@ -118,6 +118,12 @@ public class LightEmitter : MonoBehaviour
                 case "Player": //Sword Reflection
                     if (player.holdingSword && player.CanReflect(hit.point))
                     {
+                        if (!player.playedSound)
+                        {
+                            AudioManager.S.hitSword.Play();
+                            player.playedSound = true;
+                        }
+
                         Vector3 origin = Camera.main.transform.position;
                         ray.origin = origin; //Ray origin is the camera
                         ray.direction = Camera.main.transform.forward;
@@ -142,7 +148,11 @@ public class LightEmitter : MonoBehaviour
 
                     break;
                 case "Pedestal":
+                    ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
+                    break;
                 case "Hole":
+                    FloorHole floorHole = hit.collider.gameObject.GetComponent<FloorHole>();
+                    if (!floorHole.doorOpened) floorHole.OpenDoor();
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     break;
                 case "Ghost":
@@ -202,7 +212,7 @@ public class LightEmitter : MonoBehaviour
                 position = hit.point;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawLine(startPos, position);
-                DrawPredictedReflectionPattern(position, direction, reflectionsRemaining - 1);
+                DrawPredictedReflectionPattern(position + direction, direction, reflectionsRemaining - 1);
             }
         }
         else
@@ -260,7 +270,7 @@ public class LightEmitter : MonoBehaviour
         else
         {
             GameObject pedestalGO = Instantiate<GameObject>(pedestalPrefab, go.transform.position, Quaternion.identity);
-            PedestalScript pedestal = pedestalGO.transform.GetChild(2).GetComponent<PedestalScript>();
+            PedestalScript pedestal = pedestalGO.transform.Find("pedestal").GetComponent<PedestalScript>();
             pedestal.originalParent = go.transform.parent.parent;
             pedestal.transform.parent.parent = pedestal.originalParent;
             pedestal.hasMirror = false;

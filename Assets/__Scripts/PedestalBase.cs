@@ -9,10 +9,10 @@ public class PedestalBase : MonoBehaviour
 
     void Start()
     {
-        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
+/*        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
         if (gameObject.tag != "StartPedestal")
             ghostPedestal = !(transform.GetChild(2).GetComponent<PedestalScript>().locked); //Checks to see if associated pedestal is a ghost or not
-    }
+*/    }
 
     // Update is called once per frame
     void Update()
@@ -47,13 +47,13 @@ public class PedestalBase : MonoBehaviour
             if (child.transform != this.transform)
                 child.gameObject.BroadcastMessage("OnMouseOver", options: SendMessageOptions.DontRequireReceiver);
         }
-        if (gameObject.tag != "StartPedestal")
+/*        if (gameObject.tag != "StartPedestal")
         {
             if (ghostPedestal) anim.SetBool("nearGhostPedestal", true);
             else anim.SetBool("nearPedestal", true);
 
         }
-    }
+*/    }
 
     private void OnMouseExit()
     {
@@ -63,12 +63,12 @@ public class PedestalBase : MonoBehaviour
             if (child.transform != this.transform)
                 child.gameObject.BroadcastMessage("OnMouseExit", options: SendMessageOptions.DontRequireReceiver);
         }
-        if (gameObject.tag != "StartPedestal")
+/*        if (gameObject.tag != "StartPedestal")
         {
             if (ghostPedestal) anim.SetBool("nearGhostPedestal", false);
             else anim.SetBool("nearPedestal", false);
 
         }
-    }
+*/    }
 
 }

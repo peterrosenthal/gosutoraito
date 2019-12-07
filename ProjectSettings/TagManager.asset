@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Switch
+  - LightRay
+  - Pedestal
+  - Mirror
+  - LargeMirror
+  - Test
+  - StartPedestal
+  - Hole
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -17,8 +26,8 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
-  - 
-  - 
+  - Samurai
+  - Collectables
   - 
   - 
   - 

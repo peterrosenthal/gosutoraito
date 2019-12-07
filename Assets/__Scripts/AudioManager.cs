@@ -9,15 +9,23 @@ public class AudioManager : MonoBehaviour
     public AudioMixer masterMixer;
 
     public AudioSource shatterSound;
-    public AudioSource backgroundMusic;
+    public AudioSource floorBreak;
+    public AudioSource mirrorShard;
+    public AudioSource hitSwitch;
+    public AudioSource hitSword;
+    public AudioSource doorOpen;
 
-    public AudioMixerSnapshot templeSong;
+    public AudioMixerSnapshot templeSongTransition;
     
 
     void Start()
     {
         S = this;
         shatterSound = transform.Find("ShatterGlass").gameObject.GetComponent<AudioSource>();
+        floorBreak = transform.Find("ShatterFloor").gameObject.GetComponent<AudioSource>();
+        mirrorShard = transform.Find("MirrorShard").gameObject.GetComponent<AudioSource>();
+        doorOpen = transform.Find("DoorOpen").gameObject.GetComponent<AudioSource>();
+        hitSword = transform.Find("HitSword").gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,7 +36,8 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeMusic()
     {
-        templeSong.TransitionTo(5f);
+        templeSongTransition.TransitionTo(8f);
+        floorBreak.Play();
         StartCoroutine("Fade");
     }
 
@@ -36,10 +45,9 @@ public class AudioManager : MonoBehaviour
     {
         float pitch,vol;
         masterMixer.GetFloat("background1_pitch", out pitch);
-        masterMixer.SetFloat("background1_pitch", pitch+.1f);
+        masterMixer.SetFloat("background1_pitch", pitch - 0.01f);
         masterMixer.GetFloat("background1_vol", out vol);
         yield return new WaitForSeconds(.01f);
         if (vol > -70) StartCoroutine("Fade");
-
     }
 }
