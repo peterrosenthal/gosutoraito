@@ -7,10 +7,11 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerBehavior : MonoBehaviour
 {
     public static PlayerBehavior S;
+    Animator anim;
     private bool _holdingSword;
     private Transform _thisCamera;
-    private Animator anim;
-
+    private Animator animSword;
+    private GameObject sword;
 
     public int mirrorCount = 0;
     public int prismCount = 0;
@@ -36,7 +37,8 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         anim = GameObject.Find("UICanvas").GetComponent<Animator>();
-
+        sword = GameObject.Find("katana");
+        animSword = GameObject.Find("katana").GetComponent<Animator>();
         S = this;
         controllerScript = GetComponent<FirstPersonController>();
         _thisCamera = transform.GetChild(0);
@@ -49,6 +51,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (controllerScript.editingMirror) //things that happen while editing the mirror
         {
+            sword.SetActive(false);
             anim.SetBool("nearPedestal", false);
             anim.SetBool("nearGhostPedestal", false);
 
@@ -72,6 +75,7 @@ public class PlayerBehavior : MonoBehaviour
             
             if (Input.GetKeyUp(KeyCode.E)) //save the edits
             {
+                sword.SetActive(true);
                 controllerScript.editingMirror = false;
                 _editMirror = null;
                 anim.SetBool("isEditingObjectOnPedestal", false);
@@ -79,6 +83,7 @@ public class PlayerBehavior : MonoBehaviour
             }
             else if (Input.GetKeyUp(KeyCode.Q)) //cancel the edits
             {
+                sword.SetActive(true);
                 controllerScript.editingMirror = false;
                 _editMirror.transform.rotation = _previousMirrorRotation;
                 _editMirror = null;
@@ -124,10 +129,12 @@ public class PlayerBehavior : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Mouse1))
         {
+            animSword.SetBool("swinging", true);
             _holdingSword = true;
         }
         else
         {
+            animSword.SetBool("swinging", false);
             _holdingSword = false;
         }
 

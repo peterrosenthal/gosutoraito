@@ -12,6 +12,7 @@ public class floorBreak : MonoBehaviour
     GameObject treee;
     GameObject terrain;
     Light mainLight;
+    Collider wall;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class floorBreak : MonoBehaviour
         treee = GameObject.Find("treee");
         floor = GameObject.Find("fullMat");
         crystal = crystalSwitch.GetComponent<CrystalSwitch>();
+        wall = GameObject.Find("oneDoorWall").GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -39,12 +41,14 @@ public class floorBreak : MonoBehaviour
             //Change Music
             mainLight.intensity = 3f;
             AudioManager.S.ChangeMusic();
+            //Debug.Log("repeat");
             StartCoroutine("fade");
         }
     }
     IEnumerator fade()
     {
         yield return new WaitForSeconds(1);
+        wall.enabled=true;
         Destroy(GameObject.Find("brokenFloor(Clone)"));
     }
 }
