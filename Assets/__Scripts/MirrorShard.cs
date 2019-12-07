@@ -24,7 +24,7 @@ public class MirrorShard : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
+        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 6f)
         {
             anim.SetBool("ByPickupable", true);
             if (Input.GetMouseButtonDown(0))

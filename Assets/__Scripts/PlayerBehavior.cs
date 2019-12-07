@@ -11,8 +11,9 @@ public class PlayerBehavior : MonoBehaviour
     private bool _holdingSword;
     private Transform _thisCamera;
     private Animator animSword;
-    private GameObject sword;
+    public GameObject sword;
 
+    public bool playedSound = false;
     public int mirrorCount = 0;
     public int prismCount = 0;
     public Transform grabTransform;
@@ -136,6 +137,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             animSword.SetBool("swinging", false);
             _holdingSword = false;
+            playedSound = false;
         }
 
 

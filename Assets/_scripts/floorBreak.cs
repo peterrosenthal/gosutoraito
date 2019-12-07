@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 
 public class floorBreak : MonoBehaviour
 {
+    Animator anim;
     GameObject floor;
     public GameObject brokenFloor;
     public GameObject crystalSwitch;
@@ -17,6 +18,7 @@ public class floorBreak : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
         mainLight = GameObject.Find("mainLight").GetComponent<Light>();
         terrain = GameObject.Find("TerrainGroup_0");
         treee = GameObject.Find("treee");
@@ -38,6 +40,9 @@ public class floorBreak : MonoBehaviour
             Destroy(floor);
             //Make player fall
             PlayerBehavior.S.controllerScript.editingMirror = false;
+            //Reset UI
+            PlayerBehavior.S.sword.SetActive(true);
+            anim.SetBool("isEditingObjectOnPedestal", false);
             //Change Music
             mainLight.intensity = 3f;
             AudioManager.S.ChangeMusic();
