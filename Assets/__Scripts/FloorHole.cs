@@ -6,6 +6,7 @@ public class FloorHole : MonoBehaviour
 {
     public GameObject linkedDoor;
     public bool doorOpened;
+    public int waitSeconds = 2;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class FloorHole : MonoBehaviour
 
     IEnumerator DelayedOpening()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(waitSeconds);
         
         linkedDoor.GetComponent<Animator>().SetBool("levelComplete", true);
         yield return new WaitForSeconds(.5f);

@@ -21,11 +21,11 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         S = this;
-        shatterSound = transform.Find("ShatterGlass").gameObject.GetComponent<AudioSource>();
-        floorBreak = transform.Find("ShatterFloor").gameObject.GetComponent<AudioSource>();
-        mirrorShard = transform.Find("MirrorShard").gameObject.GetComponent<AudioSource>();
-        doorOpen = transform.Find("DoorOpen").gameObject.GetComponent<AudioSource>();
-        hitSword = transform.Find("HitSword").gameObject.GetComponent<AudioSource>();
+        shatterSound = GameObject.Find("ShatterGlass").gameObject.GetComponent<AudioSource>();
+        floorBreak = GameObject.Find("ShatterFloor").gameObject.GetComponent<AudioSource>();
+        mirrorShard = GameObject.Find("MirrorShard").gameObject.GetComponent<AudioSource>();
+        doorOpen = GameObject.Find("DoorOpen").gameObject.GetComponent<AudioSource>();
+        hitSword = GameObject.Find("HitSword").gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -29,6 +29,7 @@ public class PedestalScript : MonoBehaviour
     }
 
     public bool locked = true;
+    public bool startPedestal = false;
     public Vector3 oldPos;
     private bool moving = false;
 
@@ -55,7 +56,7 @@ public class PedestalScript : MonoBehaviour
     {
         //Exit edit
         //rootNode.parent = originalParent;
-        if (!PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
+        if (!startPedestal && !PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
             if (hasMirror) //Get Mirror
             {
