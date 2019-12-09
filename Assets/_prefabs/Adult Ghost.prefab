@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
   childGhost: 0
-  floatHeight: 1
-  floatSpeed: 0.5
+  floatHeight: 0.75
+  floatSpeed: 10
   speed: 1
   sightDistance: 20
   fieldOfView: 80
@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d8502f81aa92434d8f6805de2c93a33, type: 2}
+    - target: {fileID: -6057140222963153312, guid: a2210bd0252d0f447a3e5b249577c141,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ef4ef075c4cb16344907301d68113ab0, type: 2}
     - target: {fileID: -4216859302048453862, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -136,23 +141,28 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 17.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 17.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 17.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_Name
       value: Ghost_Adult
       objectReference: {fileID: 0}
+    - target: {fileID: 1308141448934812642, guid: a2210bd0252d0f447a3e5b249577c141,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a2ed3d85bc4c694da69f17a9e604bde, type: 2}
     - target: {fileID: 2258058086064438073, guid: a2210bd0252d0f447a3e5b249577c141,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
