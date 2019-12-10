@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloorHole : MonoBehaviour
 {
+    public GameObject _lightEmitter;
     public GameObject linkedDoor;
     public bool doorOpened;
     public int waitSeconds = 2;
@@ -16,22 +17,29 @@ public class FloorHole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_lightEmitter && !_lightEmitter.GetComponent<LightEmitter>()._activeCrystals.Contains(this.gameObject))
+        {
+            doorOpened = false;
+            _lightEmitter = null;
+            linkedDoor.GetComponent<Animator>().SetBool("levelComplete", false);
+
+        }
     }
 
-    public void OpenDoor()
+    public void OpenDoor(GameObject light)
     {
         doorOpened = true;
-        StartCoroutine("DelayedOpening");
+        _lightEmitter = light;
+        linkedDoor.GetComponent<Animator>().SetBool("levelComplete", true);
+        AudioManager.S.doorOpen.Play();
+        //StartCoroutine("DelayedSound");
 
     }
 
-    IEnumerator DelayedOpening()
+    IEnumerator DelayedSound()
     {
         yield return new WaitForSeconds(waitSeconds);
         
         linkedDoor.GetComponent<Animator>().SetBool("levelComplete", true);
-        yield return new WaitForSeconds(.5f);
-        AudioManager.S.doorOpen.Play();
     }
 }

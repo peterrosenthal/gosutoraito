@@ -25,12 +25,15 @@ public class LightEmitter : MonoBehaviour
     private RaycastHit _hit;
 
     private PlayerBehavior player;
+    private PedestalScript pedestal;
+    private bool playedSound = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerBehavior.S.GetComponent<PlayerBehavior>();
+        //pedestal = transform.parent.Find("pedestal").gameObject.GetComponent<PedestalScript>();
         _lineRenderer = GetComponent<LineRenderer>();
         _lineVertices = new List<Vector3>(_maxReflectionCount + 1);
         _activeCrystals = new List<GameObject>
@@ -118,10 +121,10 @@ public class LightEmitter : MonoBehaviour
                 case "Player": //Sword Reflection
                     if (player.holdingSword && player.CanReflect(hit.point))
                     {
-                        if (!player.playedSound)
+                        if (!playedSound)
                         {
                             AudioManager.S.hitSword.Play();
-                            player.playedSound = true;
+                            playedSound = true;
                         }
 
                         Vector3 origin = Camera.main.transform.position;
@@ -143,6 +146,7 @@ public class LightEmitter : MonoBehaviour
                     }
                     else
                     {
+                        playedSound = false;
                         ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     }
 
@@ -151,8 +155,13 @@ public class LightEmitter : MonoBehaviour
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     break;
                 case "Hole":
-                    FloorHole floorHole = hit.collider.gameObject.GetComponent<FloorHole>();
-                    if (!floorHole.doorOpened) floorHole.OpenDoor();
+                    FloorHole floorHole = go.GetComponent<FloorHole>();
+                    if (!floorHole.doorOpened) floorHole.OpenDoor(this.gameObject);
+                    
+                    if (!_activeCrystals.Contains(go))
+                    {
+                        _activeCrystals.Add(go);
+                    }
                     ReflectLineRenderer(hit.point + direction, direction, reflectionsLeft - 1);
                     break;
                 case "Ghost":
@@ -212,14 +221,30 @@ public class LightEmitter : MonoBehaviour
                 position = hit.point;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawLine(startPos, position);
-                DrawPredictedReflectionPattern(position + direction, direction, reflectionsRemaining - 1);
+                if (tag != "Pedestal" || tag != "Light Ray")
+                {
+                    DrawPredictedReflectionPattern(position + direction, direction, reflectionsRemaining - 1);
+
+                }
+                else
+                {
+                    return;
+                }
             }
         }
         else
         {
             position += direction * _maxStepDistance;
         }
-    } //Gizmos prediction
+    } 
+
+    void ActivateHole(GameObject go)
+    {
+        FloorHole hole = go.GetComponent<FloorHole>();
+        //hole.Activate();
+        
+
+    }
 
     void ActivateCrystal(GameObject go)
     {
