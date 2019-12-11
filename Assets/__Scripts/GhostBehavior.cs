@@ -7,6 +7,7 @@ public class GhostBehavior : MonoBehaviour
     private Ray groundRay;
     public GameObject targetObject;
     private Rigidbody rb;
+    private Animator anim;
     private float startTime;
     private float y0;
 
@@ -21,6 +22,7 @@ public class GhostBehavior : MonoBehaviour
     {
         targetObject = PlayerBehavior.S.gameObject;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         startTime = Time.time;
         y0 = transform.position.y;
     }
@@ -57,6 +59,12 @@ public class GhostBehavior : MonoBehaviour
             rot.x = rot.z = 0;
 
             transform.rotation = rot;
+
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
         }
 
         
