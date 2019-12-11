@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8739815351475866176}
   - component: {fileID: 8739815351475866183}
   - component: {fileID: 8739815351475866179}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CrystalSphere
   m_TagString: Switch
   m_Icon: {fileID: 0}
@@ -106,4 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _active: 0
+  _startSwitch: 0
   _lightEmitter: {fileID: 0}
+  _startLight: {fileID: 0}

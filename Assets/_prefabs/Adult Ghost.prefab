@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2932526635298537384}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_spine_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570552681993263938}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8971840271080061179}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_elbowtip_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5893798898770519314}
   - component: {fileID: 5159463531744813198}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ghost_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 570215650}
   - component: {fileID: 570215652}
   - component: {fileID: 8241823401446976036}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ghost_Adult
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2782246137049731685}
   m_LocalRotation: {x: -0, y: 0.30984685, z: -0, w: 0.9507865}
-  m_LocalPosition: {x: 38.710003, y: 6.0200005, z: -31}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5893798898770519314}
@@ -259,7 +259,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &570215652
 MonoBehaviour:
@@ -303,7 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7241240008667838217}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_spine_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3532979672944741383}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_elbow_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2903520614875616990}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3741883079137799218}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1682074578536826059}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5606481390492085011}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_elbowtip_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4665815827355827293}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_shoulder_2_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5506422917718280367}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Adult Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 294939598958467164}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ik_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5476498741947557388}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_sholder_1_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7774269764097571597}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5277524852219647243}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8617527093031588753}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ik_t
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2122859832289989919}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_elbow_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2152474284959728945}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 863907963303498585}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 7348782296643591157}
   - component: {fileID: 7207698865887855195}
   - component: {fileID: 6697514160593750604}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pCone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6973507357477423433}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3880028614675158624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_sholder_1_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7805494630672686465}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_shoulder_2_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5971266284146350129}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ik_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 794247457776982430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_spine_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +1033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8643286912898763948}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: joint_tail_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

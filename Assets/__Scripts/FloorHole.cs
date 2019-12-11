@@ -31,15 +31,14 @@ public class FloorHole : MonoBehaviour
         doorOpened = true;
         _lightEmitter = light;
         linkedDoor.GetComponent<Animator>().SetBool("levelComplete", true);
-        AudioManager.S.doorOpen.Play();
-        //StartCoroutine("DelayedSound");
+        
+        StartCoroutine("DelayedSound");
 
     }
 
     IEnumerator DelayedSound()
     {
-        yield return new WaitForSeconds(waitSeconds);
-        
-        linkedDoor.GetComponent<Animator>().SetBool("levelComplete", true);
+        yield return new WaitForSeconds(.5f);
+        linkedDoor.GetComponent<AudioSource>().Play();
     }
 }

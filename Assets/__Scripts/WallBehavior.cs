@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class WallBehavior : MonoBehaviour
 {
-    public GameObject[] linkedSwitches;
-    private bool isOpen = false;
+    public GameObject linkedSwitch;
+    private CrystalSwitch crystal;
+    public bool isOpen = false;
+    private Animator anim;
+    private MeshRenderer mesh;
+    private Collider collider;
 
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        crystal = linkedSwitch.GetComponent<CrystalSwitch>();
+        mesh = GetComponent<MeshRenderer>();
+        collider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -17,11 +24,10 @@ public class WallBehavior : MonoBehaviour
     {
         if (!isOpen)
         {
-            if (CheckSwitches())
+            if (crystal._active)
                 Open();
-
         }
-        else if (!CheckSwitches())
+        else if (!crystal._active)
         {
             Close();
         }
@@ -30,24 +36,13 @@ public class WallBehavior : MonoBehaviour
     private void Open()
     {
         isOpen = true;
+        anim.SetBool("wallDown", true);
     }
 
     private void Close()
     {
         isOpen = false;
+        anim.SetBool("wallDown", false);
     }
 
-    private bool CheckSwitches()
-    {
-        if (linkedSwitches.Length > 0)
-        {
-            foreach (GameObject crystal in linkedSwitches)
-            {
-                CrystalSwitch c = crystal.GetComponent<CrystalSwitch>();
-                if (!c._active) return false;
-            }
-            return true;
-        }
-        return false;
-    }
 }
