@@ -130,8 +130,8 @@ public class LightEmitter : MonoBehaviour
                         Vector3 origin = Camera.main.transform.position;
                         ray.origin = origin; //Ray origin is the camera
                         ray.direction = Camera.main.transform.forward;
-                        origin -= player.transform.up; //Offset ray origin
-                        origin += player.transform.forward;
+                        Transform katana = player.transform.Find("katana");
+                        origin = katana.position - (katana.right * 0.5f);
                         position = origin; //So the line render starts slightly below
                         _lineVertices.Add(position);
 

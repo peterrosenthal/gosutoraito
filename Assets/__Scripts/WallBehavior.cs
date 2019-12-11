@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class WallBehavior : MonoBehaviour
 {
-    public GameObject[] linkedSwitches;
-    private bool isOpen = false;
+    public GameObject linkedSwitch;
+    private CrystalSwitch crystal;
+    public bool isOpen = false;
+    private Animator anim;
+    private MeshRenderer mesh;
+    private Collider collider;
+    private AudioSource audio;
 
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        crystal = linkedSwitch.GetComponent<CrystalSwitch>();
+        mesh = GetComponent<MeshRenderer>();
+        collider = GetComponent<Collider>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isOpen)
+        if (!isOpen && crystal._active)
         {
-            if (CheckSwitches())
-                Open();
-
+            Open();
         }
-        else if (!CheckSwitches())
+        else if (!crystal._active)
         {
             Close();
         }
@@ -30,24 +37,40 @@ public class WallBehavior : MonoBehaviour
     private void Open()
     {
         isOpen = true;
+        anim.SetBool("wallDown", true);
+        StartCoroutine("DelayedSound");
+        StartCoroutine("Disable");
+        
     }
 
     private void Close()
     {
         isOpen = false;
+        StartCoroutine("DelayedSound");
+        anim.SetBool("wallDown", false);
+        mesh.enabled = true;
+        collider.enabled = true;
     }
 
-    private bool CheckSwitches()
+    IEnumerator Disable()
     {
-        if (linkedSwitches.Length > 0)
+        yield return new WaitForSeconds(3);
+        if (isOpen)
         {
-            foreach (GameObject crystal in linkedSwitches)
-            {
-                CrystalSwitch c = crystal.GetComponent<CrystalSwitch>();
-                if (!c._active) return false;
-            }
-            return true;
+            mesh.enabled = false;
+            collider.enabled = false;
+
         }
-        return false;
+        else
+        {
+            //StartCoroutine("Disable");
+        }
     }
+
+    IEnumerator DelayedSound()
+    {
+        yield return new WaitForSeconds(1f);
+        audio.Play();
+    }
+
 }
