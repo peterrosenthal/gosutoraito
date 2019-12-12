@@ -35,7 +35,7 @@ public class mirrorBreak : MonoBehaviour
         anim.SetBool("ByMirror", false);
         AudioManager.S.shatterSound.Play();
         GameObject mirror = Instantiate(brokenMirror, transform.position + transform.forward, Quaternion.identity);
-        mirror.transform.RotateAround(transform.position, transform.right, -90);
+        mirror.transform.RotateAround(transform.position, transform.right, 90);
         Destroy(this.gameObject);
     }
 }
