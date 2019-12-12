@@ -167,11 +167,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1380764361997465317, guid: 49c95cbdc34f05443921f69715dff550,
-        type: 3}
-      propertyPath: pedestalPrefab
-      value: 
-      objectReference: {fileID: 8353697752622453403}
     - target: {fileID: 1380764361997465319, guid: 49c95cbdc34f05443921f69715dff550,
         type: 3}
       propertyPath: m_Positions.Array.size
@@ -204,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1871220670027442, guid: c94c2bd218f337540b667cc2f5f18214, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4158382813722898, guid: c94c2bd218f337540b667cc2f5f18214, type: 3}
       propertyPath: m_LocalPosition.x

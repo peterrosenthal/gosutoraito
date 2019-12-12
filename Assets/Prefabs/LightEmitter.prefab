@@ -73,9 +73,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 3.5, z: -10}
-  - {x: 0, y: 3.5, z: -5}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -144,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  pedestalPrefab: {fileID: 8353697752622453403, guid: f26e704b4d0797b4d9ff0f1fdd863c8b,
+  pedestalPrefab: {fileID: 8353697752622453403, guid: 445ae744422d5a045a7544e8ea84bce7,
     type: 3}
   prismPrefab: {fileID: 1300474730768117201, guid: 9e62c9fee5513ed4393bee136fefc660,
     type: 3}
@@ -155,6 +153,7 @@ MonoBehaviour:
   _activeCrystals: []
   _activePrism: {fileID: 0}
   _parentLightEmitter: {fileID: 0}
+  _startSwitchOn: 0
 --- !u!33 &4567588731401354304
 MeshFilter:
   m_ObjectHideFlags: 0

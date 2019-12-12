@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PrismPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Animator anim;
     void Start()
     {
-        
+        anim = GameObject.Find("UICanvas").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,8 +18,31 @@ public class PrismPickup : MonoBehaviour
 
     private void OnMouseDown()
     {
-        PlayerBehavior.S.prismCount++;
+/*        PlayerBehavior.S.prismCount++;
         InventoryUI.S.UpdateInterfaceText();
-        Destroy(gameObject);
+        Destroy(gameObject);*/
+    }
+
+    private void OnMouseOver()
+    {
+        if (Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 6f)
+        {
+            anim.SetBool("ByPickupable", true);
+            if (Input.GetMouseButtonDown(0))
+            {
+                anim.SetBool("ByPickupable", false);
+                PlayerBehavior.S.prismCount++;
+                InventoryUI.S.UpdateInterfaceText();
+                AudioManager.S.mirrorShard.Play();
+
+                Destroy(gameObject);
+            }
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        anim.SetBool("ByPickupable", false);
     }
 }

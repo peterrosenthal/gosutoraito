@@ -23,6 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     public Quaternion _previousMirrorRotation;
 
     public int selectedItem = 0;
+    Transform respawnPoint;
 
     public enum equipment
     {
@@ -157,5 +158,31 @@ public class PlayerBehavior : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(new Ray(Camera.main.transform.position, Camera.main.transform.forward));
+    }
+
+    private void Die()
+    {
+
+        StartCoroutine("Respawn");
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(3);
+        transform.position = respawnPoint.position;
+        transform.rotation = respawnPoint.rotation;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Spawn":
+                respawnPoint = other.transform;
+                break;
+            case "Ghost":
+                Die();
+                break;
+        }
     }
 }

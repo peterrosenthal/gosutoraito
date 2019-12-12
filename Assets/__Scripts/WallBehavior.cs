@@ -28,7 +28,7 @@ public class WallBehavior : MonoBehaviour
         {
             Open();
         }
-        else if (!crystal._active)
+        if (isOpen && !crystal._active)
         {
             Close();
         }

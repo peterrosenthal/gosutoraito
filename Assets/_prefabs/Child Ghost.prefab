@@ -24,7 +24,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409130369343183384}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.48241502
   m_Height: 4.0883913
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 2607157537426059751}
   m_Layer: 0
   m_Name: Child Ghost
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

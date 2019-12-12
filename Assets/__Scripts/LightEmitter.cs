@@ -289,7 +289,7 @@ public class LightEmitter : MonoBehaviour
         if(ghost.childGhost)
         {
             //Instantiate Prism
-            GameObject prismGO = Instantiate<GameObject>(prismPrefab, go.transform.position, Quaternion.identity);
+            GameObject prismGO = Instantiate<GameObject>(prismPrefab, go.transform.position + (transform.up * 2), Quaternion.identity);
             Destroy(go);
         }
         else
@@ -301,6 +301,7 @@ public class LightEmitter : MonoBehaviour
             pedestal.hasMirror = false;
             pedestal.hasPrism = false;
             pedestal.locked = false;
+            pedestal.startPedestal = false;
             Destroy(go);
         }
         
