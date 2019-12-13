@@ -8,16 +8,12 @@ public class WallBehavior : MonoBehaviour
     private CrystalSwitch crystal;
     public bool isOpen = false;
     private Animator anim;
-    private MeshRenderer mesh;
-    private Collider collider;
-    private AudioSource audio;
+    new private AudioSource audio;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         crystal = linkedSwitch.GetComponent<CrystalSwitch>();
-        mesh = GetComponent<MeshRenderer>();
-        collider = GetComponent<Collider>();
         audio = GetComponent<AudioSource>();
     }
 
@@ -28,7 +24,7 @@ public class WallBehavior : MonoBehaviour
         {
             Open();
         }
-        if (isOpen && !crystal._active)
+        else if (isOpen && !crystal._active)
         {
             Close();
         }
@@ -38,39 +34,13 @@ public class WallBehavior : MonoBehaviour
     {
         isOpen = true;
         anim.SetBool("wallDown", true);
-        StartCoroutine("DelayedSound");
-        StartCoroutine("Disable");
-        
+        audio.Play();
     }
 
     private void Close()
     {
         isOpen = false;
-        StartCoroutine("DelayedSound");
         anim.SetBool("wallDown", false);
-        mesh.enabled = true;
-        collider.enabled = true;
-    }
-
-    IEnumerator Disable()
-    {
-        yield return new WaitForSeconds(3);
-        if (isOpen)
-        {
-            mesh.enabled = false;
-            collider.enabled = false;
-
-        }
-        else
-        {
-            //StartCoroutine("Disable");
-        }
-    }
-
-    IEnumerator DelayedSound()
-    {
-        yield return new WaitForSeconds(1f);
-        audio.Play();
     }
 
 }
