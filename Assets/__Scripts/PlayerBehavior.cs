@@ -35,12 +35,16 @@ public class PlayerBehavior : MonoBehaviour
     {
         get { return _holdingSword; }
     }
+
+    private void Awake()
+    {
+        S = this;
+    }
     void Start()
     {
         anim = GameObject.Find("UICanvas").GetComponent<Animator>();
         sword = GameObject.Find("katana");
         animSword = GameObject.Find("katana").GetComponent<Animator>();
-        S = this;
         controllerScript = GetComponent<FirstPersonController>();
         _thisCamera = transform.GetChild(0);
         grabTransform = transform.GetChild(1);

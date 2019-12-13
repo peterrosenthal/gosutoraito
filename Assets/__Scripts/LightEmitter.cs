@@ -6,6 +6,7 @@ public class LightEmitter : MonoBehaviour
 {
     public bool debug;
     public GameObject pedestalPrefab;
+
     public GameObject prismPrefab;
     
 
@@ -15,7 +16,7 @@ public class LightEmitter : MonoBehaviour
     public bool _isActive = false;
 
     public List<GameObject> _activeCrystals;
-    public GameObject _activePrism;
+    public List<GameObject> _activePrisms;
     public GameObject _parentLightEmitter;
     public bool _startSwitchOn;
 
@@ -50,7 +51,7 @@ public class LightEmitter : MonoBehaviour
             DrawLight();
             GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
         }
-        if (_parentLightEmitter != null  && _parentLightEmitter.GetComponent<LightEmitter>()._activePrism != this.gameObject)
+        if (_parentLightEmitter != null  && !_parentLightEmitter.GetComponent<LightEmitter>()._activePrisms.Contains(this.gameObject))
         {
             DeactivatePrism();
         }
@@ -68,6 +69,7 @@ public class LightEmitter : MonoBehaviour
 
     void DrawLight()
     {
+        _activePrisms.Clear();
         _activeCrystals.Clear();
         _lineVertices.Clear();
         _lineVertices.Add(this.transform.position);
@@ -80,7 +82,7 @@ public class LightEmitter : MonoBehaviour
         {
             _lineVertices.Add(this.transform.position + (this.transform.forward * _maxStepDistance));
         }
-        if (!_activeCrystals.Contains(_activePrism)) _activePrism = null;
+        //if (!_activeCrystals.Contains(_activePrism)) _activePrism = null;
         _lineRenderer.positionCount = _lineVertices.Count;
         _lineRenderer.SetPositions(_lineVertices.ToArray());
     }
@@ -171,7 +173,7 @@ public class LightEmitter : MonoBehaviour
                 case "LightRay":
                     /*position = hit.point;
                     _lineVertices.Add(position);*/
-                    if (go != this.gameObject)
+                    if (go.GetInstanceID() != this.gameObject.GetInstanceID())
                     {
                         ActivatePrism(go);
                     }
@@ -264,11 +266,10 @@ public class LightEmitter : MonoBehaviour
         LightEmitter prism;
         prism = go.GetComponent<LightEmitter>();
         prism._isActive = true;
-        _activePrism = go;
         prism._parentLightEmitter = this.gameObject;
-        if (!_activeCrystals.Contains(go))
+        if (!_activePrisms.Contains(go))
         {
-            _activeCrystals.Add(go);
+            _activePrisms.Add(go);
         }
         
     }

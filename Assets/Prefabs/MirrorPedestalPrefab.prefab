@@ -171,7 +171,8 @@ PrefabInstance:
         type: 3}
       propertyPath: pedestalPrefab
       value: 
-      objectReference: {fileID: 8353697752622453403}
+      objectReference: {fileID: 8353697752622453403, guid: 3870ef022dea1da4e94bf92090d280a5,
+        type: 3}
     - target: {fileID: 1380764361997465319, guid: 49c95cbdc34f05443921f69715dff550,
         type: 3}
       propertyPath: m_Positions.Array.size
