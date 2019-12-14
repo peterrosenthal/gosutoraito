@@ -32,15 +32,6 @@ public class CrystalSwitch : MonoBehaviour
         {
             Deactivate();
         }
-
-        if (_active != true && _renderer.material.color == activeColor)
-        {
-            _renderer.material.SetColor("_Color", inactiveColor);
-        }
-        if (_active && _renderer.material.color == inactiveColor)
-        {
-            _renderer.material.SetColor("_Color", activeColor);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
