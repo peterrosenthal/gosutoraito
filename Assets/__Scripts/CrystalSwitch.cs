@@ -35,11 +35,11 @@ public class CrystalSwitch : MonoBehaviour
 
         if (_active != true && _renderer.material.color == activeColor)
         {
-            _renderer.sharedMaterial.color = inactiveColor;
+            _renderer.material.SetColor("_Color", inactiveColor);
         }
         if (_active && _renderer.material.color == inactiveColor)
         {
-            _renderer.sharedMaterial.color = activeColor;
+            _renderer.material.SetColor("_Color", activeColor);
         }
     }
 
@@ -52,13 +52,13 @@ public class CrystalSwitch : MonoBehaviour
     {
         _active = true;
         if (_startSwitch && _startLight) _startLight.GetComponent<LightEmitter>()._startSwitchOn = true;
-        _renderer.material.color = activeColor;
+        _renderer.material.SetColor("_Color", activeColor);
     }
 
     public void Deactivate()
     {
         _active = false;
         _lightEmitter = null;
-        _renderer.material.color = inactiveColor;
+        _renderer.material.SetColor("_Color", inactiveColor);
     }
 }
