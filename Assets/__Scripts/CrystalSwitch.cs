@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class CrystalSwitch : MonoBehaviour
     public bool _startSwitch = false;
     public GameObject _lightEmitter;
     public GameObject _startLight;
+    public Color inactiveColor;
+    public Color activeColor;
+
+    private Renderer _renderer;
 
     void Start()
     {
@@ -15,6 +20,8 @@ public class CrystalSwitch : MonoBehaviour
         {
             _startLight = GameObject.Find("StartLight");
         }
+
+        _renderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -24,6 +31,15 @@ public class CrystalSwitch : MonoBehaviour
             !_lightEmitter.activeInHierarchy))
         {
             Deactivate();
+        }
+
+        if (_active != true && _renderer.material.color == activeColor)
+        {
+            _renderer.sharedMaterial.color = inactiveColor;
+        }
+        if (_active && _renderer.material.color == inactiveColor)
+        {
+            _renderer.sharedMaterial.color = activeColor;
         }
     }
 
@@ -36,13 +52,13 @@ public class CrystalSwitch : MonoBehaviour
     {
         _active = true;
         if (_startSwitch && _startLight) _startLight.GetComponent<LightEmitter>()._startSwitchOn = true;
-        GetComponent<Renderer>().material.color = Color.red;
+        _renderer.material.color = activeColor;
     }
 
     public void Deactivate()
     {
         _active = false;
         _lightEmitter = null;
-        GetComponent<Renderer>().material.color = Color.white;
+        _renderer.material.color = inactiveColor;
     }
 }
