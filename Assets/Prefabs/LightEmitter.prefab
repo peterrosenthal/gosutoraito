@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1380764361997465316}
   - component: {fileID: 1380764361997465319}
   - component: {fileID: 1380764361997465317}
-  - component: {fileID: 4556900484808496195}
+  - component: {fileID: 7955157151397975965}
   m_Layer: 8
   m_Name: LightEmitter
   m_TagString: LightRay
@@ -153,8 +153,8 @@ MonoBehaviour:
   _activePrisms: []
   _parentLightEmitter: {fileID: 0}
   _startSwitchOn: 0
---- !u!65 &4556900484808496195
-BoxCollider:
+--- !u!135 &7955157151397975965
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,7 +164,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.56
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &9052910468196773828
 PrefabInstance:
@@ -181,7 +181,7 @@ PrefabInstance:
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
@@ -196,17 +196,17 @@ PrefabInstance:
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.9848078
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.17364816
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
@@ -216,22 +216,37 @@ PrefabInstance:
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2025583765448940220, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3039840176966136748, guid: 0f14939d105610b4fb7437b75e197ed7,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039840176966136748, guid: 0f14939d105610b4fb7437b75e197ed7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3046412928828254383, guid: 0f14939d105610b4fb7437b75e197ed7,
         type: 3}
       propertyPath: m_Name
       value: Prism Object
+      objectReference: {fileID: 0}
+    - target: {fileID: 3046412928828254383, guid: 0f14939d105610b4fb7437b75e197ed7,
+        type: 3}
+      propertyPath: m_TagString
+      value: LightRay
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6442088642785937796, guid: 0f14939d105610b4fb7437b75e197ed7, type: 3}

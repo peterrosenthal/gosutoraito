@@ -88,8 +88,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2025583765448940220}
   - component: {fileID: 6442088642785937796}
-  - component: {fileID: 6442088642785937799}
   - component: {fileID: 6442088642785937798}
+  - component: {fileID: 3039840176966136748}
   m_Layer: 0
   m_Name: Prism Object
   m_TagString: Untagged
@@ -129,19 +129,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6442088642785937799
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046412928828254383}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6442088642785937798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +141,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cdae21da43259448e9e1cdadc62e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &3039840176966136748
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046412928828254383}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.56
+  m_Center: {x: 0, y: -0.08, z: 0}
 --- !u!1 &5776643676883969296
 GameObject:
   m_ObjectHideFlags: 0
