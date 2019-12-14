@@ -143,7 +143,7 @@ MonoBehaviour:
   debug: 0
   pedestalPrefab: {fileID: 8353697752622453403, guid: 445ae744422d5a045a7544e8ea84bce7,
     type: 3}
-  prismPrefab: {fileID: 1300474730768117201, guid: 9e62c9fee5513ed4393bee136fefc660,
+  prismPrefab: {fileID: 3046412928828254383, guid: 0f14939d105610b4fb7437b75e197ed7,
     type: 3}
   _maxReflectionCount: 200
   _maxStepDistance: 200
