@@ -48,6 +48,7 @@ public class PedestalScript : MonoBehaviour
         if (moving && !Input.GetMouseButton(1))
         {
             rootNode.parent = originalParent;
+            anim.SetBool("nearGhostPedestal", false);
         }
     }
 
