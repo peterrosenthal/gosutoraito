@@ -276,9 +276,9 @@ MonoBehaviour:
   targetObject: {fileID: 0}
   childGhost: 0
   floatHeight: 0.5
-  floatSpeed: 5
+  floatSpeed: 6
   speed: 1
-  sightDistance: 20
+  sightDistance: 50
   fieldOfView: 80
 --- !u!136 &8241823401446976036
 CapsuleCollider:

@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
         S = this;
         selectorMax = mirrorText.rectTransform.position.y + 10;
         selectorMin = prismText.rectTransform.position.y + 10;
+        UpdateInterfaceText();
     }
 
     // Update is called once per frame

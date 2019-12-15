@@ -45,9 +45,9 @@ MonoBehaviour:
   targetObject: {fileID: 0}
   childGhost: 1
   floatHeight: 0.35
-  floatSpeed: 4
+  floatSpeed: 7
   speed: 1
-  sightDistance: 20
+  sightDistance: 40
   fieldOfView: 80
 --- !u!1 &6022245847114740121
 GameObject:

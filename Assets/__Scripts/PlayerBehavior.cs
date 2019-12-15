@@ -48,7 +48,6 @@ public class PlayerBehavior : MonoBehaviour
         controllerScript = GetComponent<FirstPersonController>();
         _thisCamera = transform.GetChild(0);
         grabTransform = transform.GetChild(1);
-
     }
 
     // Update is called once per frame
