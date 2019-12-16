@@ -287,6 +287,7 @@ public class LightEmitter : MonoBehaviour
     private void KillGhost(GameObject go)
     {
         GhostBehavior ghost = go.GetComponent<GhostBehavior>();
+        ghost.PlaySound();
         if(ghost.childGhost)
         {
             //Instantiate Prism

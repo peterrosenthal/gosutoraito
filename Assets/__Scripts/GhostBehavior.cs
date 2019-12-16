@@ -91,4 +91,9 @@ public class GhostBehavior : MonoBehaviour
 
         return false;
     }
+
+    public void PlaySound()
+    {
+        ghostSound.Play();
+    }
 }

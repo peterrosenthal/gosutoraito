@@ -165,7 +165,6 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Die()
     {
-
         StartCoroutine("Respawn");
     }
 
@@ -184,6 +183,10 @@ public class PlayerBehavior : MonoBehaviour
                 respawnPoint = other.transform;
                 break;
             case "Ghost":
+                if (other.GetComponent<GhostBehavior>() != null)
+                {
+                    other.GetComponent<GhostBehavior>().PlaySound();
+                }
                 Die();
                 break;
         }
