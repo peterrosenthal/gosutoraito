@@ -10,7 +10,7 @@ public class GhostBehavior : MonoBehaviour
     private Animator anim;
     private float startTime;
     private float y0;
-    private AudioSource ghostSound;
+    private AudioClip ghostSound;
     public bool childGhost = false;
     public float floatHeight = 3f;
     public float floatSpeed = 5f;
@@ -21,7 +21,7 @@ public class GhostBehavior : MonoBehaviour
     void Start()
     {
         targetObject = PlayerBehavior.S.gameObject;
-        ghostSound = GetComponent<AudioSource>();
+        ghostSound = GetComponent<AudioSource>().clip;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         startTime = Time.time;
@@ -94,6 +94,6 @@ public class GhostBehavior : MonoBehaviour
 
     public void PlaySound()
     {
-        ghostSound.Play();
+        AudioSource.PlayClipAtPoint(ghostSound, transform.position);
     }
 }
