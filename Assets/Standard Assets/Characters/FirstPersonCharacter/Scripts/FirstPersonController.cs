@@ -133,10 +133,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (editingMirror == false)
             {
+                m_UseHeadBob = true;
+                
                 m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+
+                ProgressStepCycle(speed);
+            }
+            else
+            {
+                m_UseHeadBob = false;
             }
 
-            ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
