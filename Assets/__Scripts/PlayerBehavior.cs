@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
 
@@ -8,6 +9,8 @@ public class PlayerBehavior : MonoBehaviour
 {
     public static PlayerBehavior S;
     Animator anim;
+    Image canvas;
+    Animator canvasAnim;
     private bool _holdingSword;
     private Transform _thisCamera;
     private Animator animSword;
@@ -43,6 +46,8 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         anim = GameObject.Find("UICanvas").GetComponent<Animator>();
+        canvas = GameObject.Find("WhiteCanvas").GetComponent<Image>();
+        canvasAnim = canvas.GetComponent<Animator>();
         sword = GameObject.Find("katana");
         animSword = GameObject.Find("katana").GetComponent<Animator>();
         controllerScript = GetComponent<FirstPersonController>();
@@ -131,7 +136,7 @@ public class PlayerBehavior : MonoBehaviour
         
         
         
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1) && grabTransform.childCount==0)
         {
             animSword.SetBool("swinging", true);
             _holdingSword = true;
@@ -170,9 +175,11 @@ public class PlayerBehavior : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(3);
+        canvasAnim.SetBool("Fade", true);
+        yield return new WaitUntil(()=>canvas.color.a==1);
         transform.position = respawnPoint.position;
         transform.rotation = respawnPoint.rotation;
+        canvasAnim.SetBool("Fade", false);
     }
 
     private void OnTriggerEnter(Collider other)
