@@ -15,7 +15,8 @@ public class menu : MonoBehaviour
     {
         click = GetComponent<AudioSource>();
         //textmeshPro = GameObject.Find("play").GetComponent<TextMeshProUGUI>();
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
@@ -33,6 +34,8 @@ public class menu : MonoBehaviour
     {
         textmeshPro.faceColor = new Color32(212, 6, 6, 255);
         click.Play();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         StartCoroutine(entering());
     }
 

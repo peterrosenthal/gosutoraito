@@ -73,11 +73,11 @@ public class PlayerBehavior : MonoBehaviour
             Vector3 newRotation = currentRotation;
             if (_editMirror.tag == "Mirror")
             {
-                newRotation = new Vector3(currentRotation.x + vertical, currentRotation.y + horizontal, currentRotation.z);
+                newRotation = new Vector3(currentRotation.x + vertical/2, currentRotation.y + horizontal/2, currentRotation.z);
             }
             else if (_editMirror.tag == "LightRay")
             {
-                newRotation = new Vector3(currentRotation.x - vertical, currentRotation.y + horizontal, currentRotation.z);
+                newRotation = new Vector3(currentRotation.x - vertical/2, currentRotation.y + horizontal/2, currentRotation.z);
             }
             
             _editMirror.transform.rotation = Quaternion.Euler(newRotation);
