@@ -7,6 +7,8 @@ Jared Myers
 
 **Game Summary:**
 
-The game is made up of three levels: the first, where you use a mirror shard to reflect light from a hole in the wall and get that light to hit a certain point in the room. The second, where you aim the light at floating ghosts to scare them away. The third level involves many switches an ghosts. You must navigate through the room to reach the end, avoiding ghosts or using light to shoo them away.
+Gosutoraito, or "Ghost Light," is a light reflection puzzle game where a fallen samurai must navigate the trials of a mysterious shrine to finally put his soul to rest. Enter the shrine and dive deeper into the depths of a stony purgatory by guiding a beam of light from floor to floor with mirrors and prisms.
 
-The first level has two mechanics- reflecting light with a held old/broken sword, and moving mirror fragments on pedestals. By using these two mechanics, the player can reflect light through the room. The second has one main new mechanic- using the sword to reflect light onto ghosts from many points in the room. The third combines these mechanics in an even scarier environment, in which the user must hit all switches and use light to avoid/remove ghosts to reach the end. What's at the end is a surprise... 
+A more detailed description of the game, as well as Windows, Mac, and Linux builds, can be found on our [itch.io page](https://karasel.itch.io/gosutoraito).
+
+The game starts out with a few simple mechanics - reflecting light with a held old/broken sword, and moving mirror fragments on pedestals. By using these mechanics, the player can reflect light through the room. Later, a new mechanic is introduced - using the sword to reflect light onto ghosts from many points in the room. The game gets progressively harder, combining all these mechanics in a scary environment, in which the user must hit all the  switches and use light to avoid/remove ghosts to reach the end. What's at the end is a surprise...
