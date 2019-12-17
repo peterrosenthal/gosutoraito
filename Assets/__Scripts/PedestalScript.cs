@@ -77,20 +77,33 @@ public class PedestalScript : MonoBehaviour
             }
             else //Place  object
             {
-                if (PlayerBehavior.S.selectedItem == 0 && PlayerBehavior.S.mirrorCount > 0)
+                if (PlayerBehavior.S.selectedItem == 0)
                 {
-                    hasMirror = true;
-                    PlayerBehavior.S.mirrorCount--;
-                    InventoryUI.S.UpdateInterfaceText();
-                    AudioManager.S.mirrorShard.Play();
-
+                    if (PlayerBehavior.S.mirrorCount > 0)
+                    {
+                        hasMirror = true;
+                        PlayerBehavior.S.mirrorCount--;
+                        InventoryUI.S.UpdateInterfaceText();
+                        AudioManager.S.mirrorShard.Play();
+                    }
+                    else
+                    {
+                        InventoryUI.S.FlashUI("mirror");
+                    }
                 }
-                else if (PlayerBehavior.S.selectedItem == 1 && PlayerBehavior.S.prismCount > 0)
+                else if (PlayerBehavior.S.selectedItem == 1)
                 {
-                    hasPrism = true;
-                    PlayerBehavior.S.prismCount--;
-                    InventoryUI.S.UpdateInterfaceText();
-                    AudioManager.S.mirrorShard.Play();
+                    if (PlayerBehavior.S.prismCount > 0)
+                    {
+                        hasPrism = true;
+                        PlayerBehavior.S.prismCount--;
+                        InventoryUI.S.UpdateInterfaceText();
+                        AudioManager.S.mirrorShard.Play();
+                    }
+                    else
+                    {
+                        InventoryUI.S.FlashUI("prism");
+                    }
 
                 }
             }

@@ -25,7 +25,7 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void UpdateInterfaceText()
@@ -48,5 +48,19 @@ public class InventoryUI : MonoBehaviour
             PlayerBehavior.S.selectedItem = (int)PlayerBehavior.equipment.prism;
         }
         selector.rectTransform.position = pos;
+    }
+
+    public void FlashUI(string ui)
+    {
+        if (ui == "mirror")
+        {
+            mirrorText.GetComponent<Animator>().SetBool("flash", true);
+
+        }
+        else if (ui == "prism")
+        {
+            prismText.GetComponent<Animator>().SetBool("flash", true);
+
+        }
     }
 }
