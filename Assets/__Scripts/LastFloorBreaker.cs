@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Aura2API;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 
 public class LastFloorBreaker : MonoBehaviour
@@ -18,6 +20,8 @@ public class LastFloorBreaker : MonoBehaviour
 
     public AudioMixerSnapshot silence;
 
+    private GameObject player;
+
 
     void Start()
     {
@@ -25,6 +29,7 @@ public class LastFloorBreaker : MonoBehaviour
         audio = GetComponent<AudioSource>();
         canvas = GameObject.Find("WhiteCanvas").GetComponent<Image>();
         canvasAnim = canvas.GetComponent<Animator>();
+        player = GameObject.Find("Samurai");
     }
 
     // Update is called once per frame
@@ -65,6 +70,7 @@ public class LastFloorBreaker : MonoBehaviour
     {
         canvasAnim.SetBool("WhiteFade", true);
         yield return new WaitUntil(() => canvas.color.a == 1);
+        player.GetComponent<FirstPersonController>().public_MouseLook.SetCursorLock(false);
         SceneManager.LoadScene("menu");
     }
 
