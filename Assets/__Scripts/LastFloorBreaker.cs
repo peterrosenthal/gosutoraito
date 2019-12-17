@@ -70,7 +70,8 @@ public class LastFloorBreaker : MonoBehaviour
     {
         canvasAnim.SetBool("WhiteFade", true);
         yield return new WaitUntil(() => canvas.color.a == 1);
-        player.GetComponent<FirstPersonController>().public_MouseLook.SetCursorLock(false);
+        //player.GetComponent<FirstPersonController>().public_MouseLook.SetCursorLock(false);
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("menu");
     }
 

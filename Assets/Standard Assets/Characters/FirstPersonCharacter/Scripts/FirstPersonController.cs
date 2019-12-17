@@ -43,7 +43,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
         public bool editingMirror;
-        public MouseLook public_MouseLook;
+        public MouseLook public_MouseLook
+        {
+            get { return m_MouseLook; }
+            set { m_MouseLook = value; }
+        }
 
 
         // Use this for initialization
@@ -95,7 +99,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void PlayLandingSound()
         {
             m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
+            //m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
         }
 
@@ -175,7 +179,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_NextStep = m_StepCycle + m_StepInterval;
 
-            PlayFootStepAudio();
+            //PlayFootStepAudio();
         }
 
 
