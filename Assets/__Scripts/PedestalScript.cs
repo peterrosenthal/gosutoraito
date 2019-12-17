@@ -31,7 +31,7 @@ public class PedestalScript : MonoBehaviour
     public bool locked = true;
     public bool startPedestal = false;
     public Vector3 oldPos;
-    private bool moving = false;
+    public bool moving = false;
 
     void Start()
     {
@@ -48,6 +48,7 @@ public class PedestalScript : MonoBehaviour
         if (moving && !Input.GetMouseButton(1))
         {
             rootNode.parent = originalParent;
+            moving = false;
             anim.SetBool("nearGhostPedestal", false);
         }
     }
@@ -57,6 +58,8 @@ public class PedestalScript : MonoBehaviour
     {
         //Exit edit
         //rootNode.parent = originalParent;
+        anim.SetBool("nearGhostPedestal", false);
+
         if (!startPedestal && !PlayerBehavior.S.controllerScript.editingMirror && Vector3.Distance(transform.position, PlayerBehavior.S.transform.position) < 5f)
         {
             if (hasMirror) //Get Mirror
