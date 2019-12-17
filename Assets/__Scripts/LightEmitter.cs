@@ -287,15 +287,17 @@ public class LightEmitter : MonoBehaviour
     private void KillGhost(GameObject go)
     {
         GhostBehavior ghost = go.GetComponent<GhostBehavior>();
-        ghost.PlaySound();
+        
         if(ghost.childGhost)
         {
             //Instantiate Prism
+            ghost.PlaySound("Child");
             GameObject prismGO = Instantiate<GameObject>(prismPrefab, go.transform.position + (transform.up * 2), Quaternion.identity);
             Destroy(go);
         }
         else
         {
+            ghost.PlaySound("Adult");
             GameObject pedestalGO = Instantiate<GameObject>(pedestalPrefab, go.transform.position, Quaternion.identity);
             PedestalScript pedestal = pedestalGO.transform.Find("pedestal").GetComponent<PedestalScript>();
             pedestal.originalParent = go.transform.parent.parent;

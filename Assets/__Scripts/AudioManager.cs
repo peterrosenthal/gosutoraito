@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource hitSwitch;
     public AudioSource hitSword;
     public AudioSource doorOpen;
+    public AudioSource adultGhost;
+    public AudioSource childGhost;
 
     public AudioMixerSnapshot templeSongTransition;
     
@@ -26,6 +28,8 @@ public class AudioManager : MonoBehaviour
         mirrorShard = GameObject.Find("MirrorShard").gameObject.GetComponent<AudioSource>();
         doorOpen = GameObject.Find("DoorOpen").gameObject.GetComponent<AudioSource>();
         hitSword = GameObject.Find("HitSword").gameObject.GetComponent<AudioSource>();
+        adultGhost = GameObject.Find("AdultGhost").gameObject.GetComponent<AudioSource>();
+        childGhost = GameObject.Find("ChildGhost").gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

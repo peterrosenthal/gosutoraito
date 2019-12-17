@@ -92,8 +92,18 @@ public class GhostBehavior : MonoBehaviour
         return false;
     }
 
-    public void PlaySound()
+    public void PlaySound(string type)
     {
-        AudioSource.PlayClipAtPoint(ghostSound, transform.position);
+        //AudioSource.PlayClipAtPoint(ghostSound, transform.position);
+        if (type == "Adult")
+        {
+            AudioManager.S.adultGhost.Play();
+
+        }
+        else if(type == "Child")
+        {
+            AudioManager.S.childGhost.Play();
+
+        }
     }
 }

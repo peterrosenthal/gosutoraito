@@ -30,25 +30,6 @@ CapsuleCollider:
   m_Height: 4.0883913
   m_Direction: 1
   m_Center: {x: 0.021971822, y: 1.963016, z: 0.08715671}
---- !u!114 &9160453649880908789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409130369343183384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61384b1ecf7d81418b87d3feaa0180c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
-  childGhost: 1
-  floatHeight: 0.35
-  floatSpeed: 7
-  speed: 1
-  sightDistance: 40
-  fieldOfView: 80
 --- !u!82 &3247993995141908291
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,7 +39,8 @@ AudioSource:
   m_GameObject: {fileID: 1409130369343183384}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5055185212693324077, guid: 73becab37bb8a99459e0714e6f2d5bb1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1526873ae993db64dbfbd1baea556dfc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -145,6 +127,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9160453649880908789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409130369343183384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61384b1ecf7d81418b87d3feaa0180c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  childGhost: 1
+  floatHeight: 0.35
+  floatSpeed: 7
+  speed: 1
+  sightDistance: 40
+  fieldOfView: 80
 --- !u!1 &6022245847114740121
 GameObject:
   m_ObjectHideFlags: 0

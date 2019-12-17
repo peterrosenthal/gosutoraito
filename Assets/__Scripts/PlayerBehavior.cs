@@ -192,7 +192,15 @@ public class PlayerBehavior : MonoBehaviour
             case "Ghost":
                 if (other.GetComponent<GhostBehavior>() != null)
                 {
-                    other.GetComponent<GhostBehavior>().PlaySound();
+                    GhostBehavior ghost = other.GetComponent<GhostBehavior>();
+                    if (ghost.childGhost)
+                    {
+                        ghost.PlaySound("Child");
+                    }
+                    else
+                    {
+                        ghost.PlaySound("Adult");
+                    }
                 }
                 Die();
                 break;
