@@ -23,7 +23,7 @@ public class LastFloorBreaker : MonoBehaviour
     {
         anim = GameObject.Find("UICanvas").GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
-        canvas = GameObject.Find("WhiteCanvas").GetComponent<Image>(); ;
+        canvas = GameObject.Find("WhiteCanvas").GetComponent<Image>();
         canvasAnim = canvas.GetComponent<Animator>();
     }
 
