@@ -204,7 +204,7 @@ Camera:
     height: 1
   near clip plane: 0.09339204
   far clip plane: 18678.408
-  field of view: 46.997646
+  field of view: 48.82309
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -423,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5853914262089011789
 Transform:
   m_ObjectHideFlags: 0
